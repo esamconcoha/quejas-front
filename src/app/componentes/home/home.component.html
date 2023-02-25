@@ -1,87 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <body>
-<head>
+
+<body>
+
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-</head>
+  </head>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark  bg-light ">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="https://github.com/Juarezgump655" routerLinkActive="active" class="nav-link ms-auto"
+          style="color:white;">JUAREZGUMP655@</a>
+      </li>
 
-<mat-toolbar class="navBar"  >
-  <a href="/" >{{appName}}</a>
-    
-   
-    <button mat-button class="button" [routerLink]="['/login']">¿Trabajas aquí?</button>
-    <button mat-button class="button">consulta de quejas</button>
-    <button mat-button class="button">sobre nosotros</button>
+      <li class="nav-item">
+        <a href="https://github.com/esamconcoha" routerLinkActive="active" class="nav-link ms-auto"
+          style="color:white;">ESAMCONCOHA@</a>
+      </li>
 
-  
-</mat-toolbar>
+      <li class="nav-item">
+        <a href="registrarse-usuario" routerLinkActive="active" class="nav-link " style="color:white;">REGISTRARSE</a>
+      </li>
+      <li class="nav-item">
+        <a href="consultar-vuelos" routerLinkActive="active" class="nav-link ms-auto" style="color:white;">CONSULTAS DE
+          QUEJAS</a>
+      </li>
+      <li class="nav-item ">
+        <a href="/login" routerLinkActive="active" class="nav-link ms-auto" style="color:white;">TRABAJAS AQUI?</a>
+      </li>
 
+    </ul>
+  </nav>
+  <br>
+  <br>
+  <section class="container">
+    <div class="row">
 
+      <div class="col">
+        <div class="row row-campos">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Nuestro sistema de quejas</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="../../../assets/imagenes/quejas1.jpg">
+            <mat-card-content>
+              <p>
+                Buscamos dar siempre es mejor servicio, es por eso que ahora contamos cno un sistema de Quejas, para
+                poder saber sus inconformidades y mejorar nuestros servicios
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
 
-
-<div class="row">
- 
-    <section class="contenedor">
-       <mat-card class="example-card">
-    <mat-card-header> 
-      <mat-card-title>Nuestro sistema de quejas</mat-card-title>  
-    </mat-card-header>
-    <img mat-card-image src="../../../assets/imagenes/quejas1.jpg">
-    <mat-card-content>
-      <p>
-      Buscamos dar siempre es mejor servicio, es por eso que ahora contamos cno un sistema de Quejas, para 
-      poder saber sus inconformidades y mejorar nuestros servicios
-      </p>
-    </mat-card-content>
-       </mat-card>
-
-
-    
-      
-     
-      <mat-card class="example-card2">
-        <mat-card-header> 
-        <mat-card-title>Atencion Presencial</mat-card-title>  
-        </mat-card-header>
-        <img mat-card-image src="../../../assets/imagenes/quejas2.jpg">
-        <mat-card-content>
-        <p>
-        Nuestros agentes del servicio al cliente estan preparados para escuchar sus disconformidades e ingresarlas 
-        en nuestro sistema de quejas, puedes acercarte a nuestros puntos de atencion y realizar tu queja
-       </p>
-    </mat-card-content>
-  </mat-card> 
-
-
-  <mat-card class="example-card2">
-    <mat-card-header> 
-    <mat-card-title>Autoservicio</mat-card-title>  
-    </mat-card-header>
-    <img mat-card-image src="../../../assets/imagenes/quejas3.jpg">
-    <mat-card-content>
-    <p>
-    Tambien hemos puesto una nueva opcion para nuestros cuentahabientes, ahora pueden realizar de manera autonoma sus quejas
-    a traves de nuestro sistema, sin necesidad de acercarte a un punto de atencion 
-   </p>
-</mat-card-content>
-</mat-card> 
-
-</section>
-
-|
-
-</div>
+      <div class="col">
+        <div class="row row-campos">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Atencion Presencial</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="../../../assets/imagenes/quejas2.jpg">
+            <mat-card-content>
+              <p>
+                Nuestros agentes del servicio al cliente estan preparados para escuchar sus disconformidades e
+                ingresarlas
+                en nuestro sistema de quejas, puedes acercarte a nuestros puntos de atencion y realizar tu queja
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
 
 
+      <div class="col">
+        <div class="row row-campos">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title >
+                Autoservicio
+              </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="../../../assets/imagenes/quejas3.jpg">
+            <mat-card-content>
+              <p>
+                Tambien hemos puesto una nueva opcion para nuestros cuentahabientes, ahora pueden realizar de manera
+                autonoma sus quejas
+                a traves de nuestro sistema, sin necesidad de acercarte a un punto de atencion
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
 
 
-
-
+    </div>
+  </section>
 </body>
 
 </html>
-
-
