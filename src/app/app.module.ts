@@ -1,4 +1,10 @@
-import { NgModule } from '@angular/core';
+
+//Componentes
+import { LoginComponent } from './componentes/login/login.component';
+import { MiPrestamitoRegistrarseComponent } from './componentes/Usuario-Externo/Mi-prestamito-registrarse/Mi-prestamito-registrarse.component';
+
+//Material
+import { NgModule, ɵɵsyntheticHostProperty } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,30 +14,38 @@ import { HomeComponent } from './componentes/home/home.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { LoginComponent } from './componentes/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatLabel } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    MiPrestamitoRegistrarseComponent
+
   ],
+  providers: [],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-   MatToolbarModule,
-   MatButtonModule,
+    MatToolbarModule,
+    MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    MatRadioModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  ]
+
 })
 export class AppModule { }
