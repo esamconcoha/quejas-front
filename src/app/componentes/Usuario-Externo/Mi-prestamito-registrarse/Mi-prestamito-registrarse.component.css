@@ -1,5 +1,5 @@
 .botonLogin{
-    font-size: 20pt; 
+    font-size: 17pt; 
     font-family: 'Segoe UI Black', Courier, monospace; 
     border: transparent; 
     color: white;
@@ -36,10 +36,17 @@ h1{
 
   .Guardar{
     font-family: 'Segoe UI Black', Courier, monospace;
-    font-size: 25pt;
+    font-size: 18pt;
     color:white;
     background-color:#16CCCC;
     border-radius: 30px;
     border-color: white;
      width: 200px;
   }
+.title{
+    font-family: 'Segoe UI Black', Courier, monospace;
+    font-size: 18pt;
+}
+ .col{
+    margin-left: 50px;
+ }
