@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/service/Usuario.service';
+import Swal from 'sweetalert2';
+import { Usuario } from '../../Models/usuario';
 
 @Component({
   selector: 'app-Mi-prestamito-registrarse',
@@ -18,7 +21,7 @@ export class MiPrestamitoRegistrarseComponent implements OnInit {
     numeroTelefono: [],
 
   })
-  constructor(private router: Router,private formBuilder:FormBuilder) { }
+  constructor(private router: Router,private formBuilder:FormBuilder, private UsuarioServicio:UsuarioService) { }
 
   ngOnInit() {
   }
@@ -29,5 +32,51 @@ export class MiPrestamitoRegistrarseComponent implements OnInit {
   irSesion(){
     this.router.navigate(['/iniciar-sesion']);
   }
+
+  
+  guardarUsuario(user?: Usuario) {
+    this.UsuarioServicio.registrarUsuario(user!).toPromise().then(dato => {
+      console.log(dato);
+    },error => Swal.fire('ERROR', `Hubo problemas al crear el Usuario, Porfavor intenta de nuevo`, `error`))
+  }
+
+
+  CrearUsuario(): void {
+    let fecha = new Date();
+    let desdeStr = `${fecha.getDate()}-${('0' + (fecha.getMonth() + 1)).slice(-2)}-${fecha.getFullYear()}`;
+    const user: Usuario = {
+      idusuario: 0,
+      dpi: this.formularioCreacionUsuario.get("dpi")?.value,
+      nombre: this.formularioCreacionUsuario.get("Nombre")?.value,
+      apellidos: this.formularioCreacionUsuario.get("apellidos")?.value,
+      correo: this.formularioCreacionUsuario.get("correo")?.value,
+      id_cargo: 8,
+      estado: 1,
+      usuariocreo: 1,
+      fechacreacion: desdeStr,
+      fechamodificacion: desdeStr,
+      usuariomodifico: 1,
+      password: this.formularioCreacionUsuario.get("password")?.value,
+      rol: 6,
+      idpuntoatencion: null,
+      telefono: this.formularioCreacionUsuario.get("numeroTelefono")?.value
+    }
+    Swal.fire({
+      title: '¿Estas seguro?',
+      icon: 'warning',
+      text: '¿Está seguro de continuar?',
+      showCancelButton: true,
+      confirmButtonText: 'Si , estoy seguro',
+      cancelButtonText: 'No, cancelar',
+      
+    }).then((result) => {
+     console.log(user);
+     if (result.isConfirmed) {
+      this.guardarUsuario(user);
+  }
+
+    })
+  }
+
 
 }
