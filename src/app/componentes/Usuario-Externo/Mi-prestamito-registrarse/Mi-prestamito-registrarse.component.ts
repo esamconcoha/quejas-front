@@ -30,7 +30,7 @@ export class MiPrestamitoRegistrarseComponent implements OnInit {
     this.router.navigate(['/menu-principal']);
   }
   irSesion(){
-    this.router.navigate(['/iniciar-sesion']);
+    this.router.navigate(['/login']);
   }
 
   

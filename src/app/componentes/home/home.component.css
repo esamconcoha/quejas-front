@@ -28,3 +28,28 @@
     background-size: cover;
   }
   
+
+  .navegacion {
+    background-color: #333;
+     
+  color: #fff;
+  padding: 10px;
+   
+  list-style: none;
+    
+  margin: 0;
+    
+  padding: 0;
+
+  display: inline-block;
+    
+  margin-right: 20px;
+   
+  margin-right: 0;
+   
+  color: #fff;
+   
+  text-decoration: none;
+  
+  text-decoration: underline;
+}
