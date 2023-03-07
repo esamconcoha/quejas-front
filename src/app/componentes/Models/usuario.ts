@@ -17,3 +17,8 @@ export class Usuario {
 
 
 }
+
+export interface usuarioSesion {
+    username:string;
+    password:string;
+}

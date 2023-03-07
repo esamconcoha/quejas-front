@@ -14,4 +14,8 @@ constructor(private httpClient: HttpClient) { }
 registrarUsuario(usuariosinternos: Usuario): Observable<Usuario> {
   return this.httpClient.post<Usuario>(`${this.baseURL}/guardarUsuario`, usuariosinternos);
 }
+
+
+
+
 }
