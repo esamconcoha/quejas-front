@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { token } from '../componentes/Models/token';
 import { usuarioSesion, Usuario } from '../componentes/Models/usuario';
 
 @Injectable({
@@ -10,8 +11,8 @@ export class SesionService {
   private baseURL = "http://localhost:8081/Mi-prestamito/api/auth";
 constructor(private httpClient: HttpClient) { }
 
-iniciarSesion(sesion:usuarioSesion): Observable<String> {
-  return this.httpClient.post<String>(`${this.baseURL}/authenticate`, sesion);
+iniciarSesion(sesion:usuarioSesion): Observable<token> {
+  return this.httpClient.post<token>(`${this.baseURL}/authenticate`, sesion);
 }
 
 

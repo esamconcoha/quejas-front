@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SesionService } from 'src/app/service/sesion.service';
+import { TokenService } from 'src/app/service/token.service';
 import Swal from 'sweetalert2';
 import { usuarioSesion } from '../Models/usuario';
 
@@ -14,7 +15,9 @@ export class LoginComponent implements OnInit {
   formLogueo:FormGroup;
 
 
-  constructor(private fb:FormBuilder, private sesionService:SesionService)  { 
+  constructor(private fb:FormBuilder, private sesionService:SesionService,
+    private tokenService:TokenService)  { 
+
     this.formLogueo= this.fb.group({
       usuario:['', Validators.required],
       password:['',Validators.required]
@@ -33,10 +36,10 @@ ingresar(){
     password:this.formLogueo.get('password')?.value
   }
 
-  this.sesionService.iniciarSesion(sesion).subscribe(dato=>{
+  this.sesionService.iniciarSesion(sesion).subscribe(token=>{
     Swal.fire('Bienvenido', `Bienvenido ${sesion.username}`, `success`)
-    console.log(dato);
-
+    this.tokenService.setToken(token.jwt);
+   console.log(this.tokenService.getToken());
   },error => Swal.fire('ERROR', `El usuario y/o la contraseña ingresados son incorrectos por favor intente de nuevo`, `error`))
 
 }
