@@ -36,6 +36,7 @@ export class MiPrestamitoRegistrarseComponent implements OnInit {
   
   guardarUsuario(user?: Usuario) {
     this.UsuarioServicio.registrarUsuario(user!).toPromise().then(dato => {
+      Swal.fire('Usuario Creado', `El Usuario ${user!.nombre} ${user!.apellidos} ha sido creado con exito`, `success`)
       console.log(dato);
       this.irSesion();
     },error => Swal.fire('ERROR', `Hubo problemas al crear el Usuario, Porfavor intenta de nuevo`, `error`))
@@ -53,10 +54,10 @@ export class MiPrestamitoRegistrarseComponent implements OnInit {
       correo: this.formularioCreacionUsuario.get("correo")?.value,
       id_cargo: 8,
       estado: 1,
-      usuariocreo: 4,
+      usuariocreo:  this.formularioCreacionUsuario.get("dpi")?.value,
       fechacreacion: desdeStr,
       fechamodificacion: desdeStr,
-      usuariomodifico: 4,
+      usuariomodifico:  this.formularioCreacionUsuario.get("dpi")?.value,
       password: this.formularioCreacionUsuario.get("password")?.value,
       rol: 6,
       idpuntoatencion: null,
