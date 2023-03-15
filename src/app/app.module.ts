@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './componentes/helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     MiPrestamitoRegistrarseComponent
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,useClass: Interceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
