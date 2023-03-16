@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { navbarData } from './nav-data';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/service/token.service';
 import Swal from 'sweetalert2';
+
+
+interface SideNavToggle{
+  screenWidth: number;
+  collapsed:boolean;
+}
 
 @Component({
   selector: 'app-sidebar',
@@ -10,8 +17,16 @@ import Swal from 'sweetalert2';
 })
 export class SidebarComponent implements OnInit {
 
+  @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+  
+  collapsed=false;
+  screenWidth: 0 = 0;
+  navData=navbarData;
+
   constructor(private tokenService: TokenService,
-    private router: Router) { }
+    private router: Router) { 
+    
+  }
 
   ngOnInit(): void {
   }
@@ -38,4 +53,17 @@ export class SidebarComponent implements OnInit {
 
   // }
 
+
+
+  toggleCollapse():void{
+    this.collapsed=!this.collapsed;
+    this.onToggleSideNav.emit({collapsed: this.collapsed,  screenWidth: this.screenWidth})
+  }
+
+  closeSidenav():void{
+    this.collapsed=false;
+    this.onToggleSideNav.emit({collapsed: this.collapsed,  screenWidth: this.screenWidth})
+  }
 }
+
+

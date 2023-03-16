@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 
+interface SideNavToggle{
+  screenWidth: number;
+  collapsed:boolean;
+}
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  isSideNavCollapsed=false;
+  screenWidth: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onToggleSideNav(data: SideNavToggle):void{
+    this.screenWidth = data.screenWidth;
+    this.isSideNavCollapsed = data.collapsed;
+  }
 }

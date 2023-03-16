@@ -1,3 +1,10 @@
+import { ReporteAdministrativoComponent } from './reporte-administrativo/reporte-administrativo.component';
+import { SeguimientoCentralizadorComponent } from './seguimiento-centralizador/seguimiento-centralizador.component';
+import { ResolucionQuejaComponent } from './resolucion-queja/resolucion-queja.component';
+import { AsignacionQuejaComponent } from './asignacion-queja/asignacion-queja.component';
+import { IngresoQuejaComponent } from './ingreso-queja/ingreso-queja.component';
+import { UsuariosPaComponent } from './usuarios-pa/usuarios-pa.component';
+import { BodyComponent } from './body/body.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -24,7 +31,14 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
   declarations: [
     DashboardComponent,
     SidebarComponent,
-    PuntosAtencionComponent
+    PuntosAtencionComponent,
+    BodyComponent,
+    UsuariosPaComponent,
+    IngresoQuejaComponent,
+    AsignacionQuejaComponent,
+    ResolucionQuejaComponent,
+    SeguimientoCentralizadorComponent,
+    ReporteAdministrativoComponent
   ],
   imports: [
     CommonModule,

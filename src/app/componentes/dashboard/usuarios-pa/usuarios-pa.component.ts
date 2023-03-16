@@ -3,21 +3,22 @@ interface SideNavToggle{
   screenWidth: number;
   collapsed:boolean;
 }
+
 @Component({
-  selector: 'app-puntos-atencion',
-  templateUrl: './puntos-atencion.component.html',
-  styleUrls: ['./puntos-atencion.component.css']
+  selector: 'app-usuarios-pa',
+  templateUrl: './usuarios-pa.component.html',
+  styleUrls: ['./usuarios-pa.component.css']
 })
-export class PuntosAtencionComponent implements OnInit {
+export class UsuariosPaComponent implements OnInit {
   isSideNavCollapsed=false;
   screenWidth: number = 0;
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
-
   onToggleSideNav(data: SideNavToggle):void{
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
   }
+
 }
