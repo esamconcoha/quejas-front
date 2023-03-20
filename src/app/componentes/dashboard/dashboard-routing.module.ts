@@ -9,7 +9,7 @@ import { PuntosAtencionComponent } from './puntos-atencion/puntos-atencion.compo
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { ReportesComponent } from './reportes/reportes.component';
+
 
 const routes: Routes = [
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
    {path:'sidebar',component:SidebarComponent},
 
 
-   {path:'reportes',component:ReportesComponent},
+ 
 
    {path:'principal',component:DashboardComponent},
     {path:'',redirectTo:'dashboard/principal'}
