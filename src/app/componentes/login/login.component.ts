@@ -1,3 +1,4 @@
+import { DashboardComponent } from './../dashboard/dashboard.component';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -48,7 +49,7 @@ ingresar(){
     })
     this.tokenService.setToken(token.jwt);
     this.tokenService.setUserName(token.nombre);
-    this.router.navigate(['pagina-principal']);
+    this.router.navigateByUrl('/dashboard/principal');
   },error => Swal.fire('ERROR', `El usuario y/o la contraseña ingresados son incorrectos por favor intente de nuevo`, `error`))
 
 }

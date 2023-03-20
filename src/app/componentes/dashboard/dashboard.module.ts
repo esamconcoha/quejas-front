@@ -44,9 +44,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     CommonModule,
     DashboardRoutingModule,
     MatFormFieldModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
+    
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,

@@ -12,7 +12,9 @@ import { DashboardComponent } from './dashboard.component';
 import { ReportesComponent } from './reportes/reportes.component';
 
 const routes: Routes = [
-  {path:'',
+  {
+    path:'',
+  
   children:[
    {path:'puntos-atencion',component:PuntosAtencionComponent},
    {path:'usuarios-pa',component:UsuariosPaComponent},
@@ -22,13 +24,13 @@ const routes: Routes = [
    {path:'seguimiento-centralizador',component:SeguimientoCentralizadorComponent},
    {path:'reporte-administrativo',component:ReporteAdministrativoComponent},
    {path:'sidebar',component:SidebarComponent},
-<<<<<<< Updated upstream
-   {path:'dashboard',component:DashboardComponent},
-   {path:'reportes',component:ReportesComponent}
-=======
+
+
+   {path:'reportes',component:ReportesComponent},
+
    {path:'principal',component:DashboardComponent},
-    {path:'',redirectTo:'principal',pathMatch:'full'}
->>>>>>> Stashed changes
+    {path:'',redirectTo:'dashboard/principal'}
+
   ]}
 ];
 
