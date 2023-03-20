@@ -1,7 +1,7 @@
 export class Queja {
     idQueja: number=0;
     idMedioIngresoQueja: number=0;
-    idDocumento: number=0;
+    idPuntoAtencion: number=0;
     fechaHoraIngreso: string='';
     detalleQueja: string='';
     usuariocreo: string='';

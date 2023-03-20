@@ -39,11 +39,16 @@ ingresar(){
   }
 
   this.sesionService.iniciarSesion(sesion).subscribe(token=>{
-    Swal.fire('Bienvenido', `Bienvenido ${sesion.username}`, `success`)
+    Swal.fire({
+      icon: 'success',
+      timerProgressBar: true,
+      title: 'Bienvenido ' + this.formLogueo.get('usuario')?.value,
+      showConfirmButton: false,
+      timer: 1000
+    })
     this.tokenService.setToken(token.jwt);
     this.tokenService.setUserName(token.nombre);
-    this.router.navigate(['dashboard/principal']);
-   console.log(this.tokenService.getToken());
+    this.router.navigate(['pagina-principal']);
   },error => Swal.fire('ERROR', `El usuario y/o la contraseña ingresados son incorrectos por favor intente de nuevo`, `error`))
 
 }
