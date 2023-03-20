@@ -9,8 +9,12 @@ import { PuntosAtencionComponent } from './puntos-atencion/puntos-atencion.compo
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
+
+
 const routes: Routes = [
-  {path:'',
+  {
+    path:'',
+  
   children:[
    {path:'puntos-atencion',component:PuntosAtencionComponent},
    {path:'usuarios-pa',component:UsuariosPaComponent},
@@ -21,7 +25,8 @@ const routes: Routes = [
    {path:'reporte-administrativo',component:ReporteAdministrativoComponent},
    {path:'sidebar',component:SidebarComponent},
    {path:'principal',component:DashboardComponent},
-    {path:'',redirectTo:'principal',pathMatch:'full'}
+    {path:'',redirectTo:'dashboard/principal'}
+
   ]}
 ];
 
