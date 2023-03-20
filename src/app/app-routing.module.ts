@@ -1,5 +1,4 @@
 
-import { DashboardModule } from './componentes/dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './componentes/home/home.component';

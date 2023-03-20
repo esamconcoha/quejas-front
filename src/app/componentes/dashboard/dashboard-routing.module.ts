@@ -9,8 +9,6 @@ import { PuntosAtencionComponent } from './puntos-atencion/puntos-atencion.compo
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { ReportesComponent } from './reportes/reportes.component';
-
 const routes: Routes = [
   {path:'',
   children:[
@@ -22,13 +20,8 @@ const routes: Routes = [
    {path:'seguimiento-centralizador',component:SeguimientoCentralizadorComponent},
    {path:'reporte-administrativo',component:ReporteAdministrativoComponent},
    {path:'sidebar',component:SidebarComponent},
-<<<<<<< Updated upstream
-   {path:'dashboard',component:DashboardComponent},
-   {path:'reportes',component:ReportesComponent}
-=======
    {path:'principal',component:DashboardComponent},
     {path:'',redirectTo:'principal',pathMatch:'full'}
->>>>>>> Stashed changes
   ]}
 ];
 
