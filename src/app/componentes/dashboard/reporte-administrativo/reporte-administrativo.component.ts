@@ -19,4 +19,6 @@ export class ReporteAdministrativoComponent implements OnInit {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
   }
+
+  
 }
