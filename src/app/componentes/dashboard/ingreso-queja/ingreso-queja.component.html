@@ -1,4 +1,5 @@
 <app-sidebar (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
-<p>
-  ingreso-queja works!
-</p>
+<div class="body" [ngClass]="getBodyClass()" >
+  <router-outlet></router-outlet>
+  <h1>INGRESO DE QUEJA POR USUARIO INTERNO</h1>
+</div>

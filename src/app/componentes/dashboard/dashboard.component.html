@@ -1,8 +1,14 @@
 
 
-<app-sidebar (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
-<!--  <app-body>
-    [collapsed]="isSideNavCollapsed"
-    [screenWidth]="screenWidth"
-</app-body>  -->
-<h1>es el dashboard wei</h1>
+<app-sidebar (onToggleSideNav)="onToggleSideNav($event)">
+ 
+</app-sidebar>
+
+
+<div class="body" [ngClass]="getBodyClass()" >
+  <router-outlet></router-outlet>
+  <h1>DASHBOARD</h1>
+</div>
+
+
+ 

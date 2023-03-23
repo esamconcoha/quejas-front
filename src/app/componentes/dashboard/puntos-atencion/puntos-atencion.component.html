@@ -1,2 +1,25 @@
 <app-sidebar (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
-<h1>puntos atencion</h1>
+
+<!-- se pone este div inicial para hacer llamado al metodo de typescript que cambia la clase del css
+     para que la barra lateral no tape el contenido del propio componente -->
+<div class="body" [ngClass]="getBodyClass()" >
+    <router-outlet></router-outlet>
+    <!-- de aquí en adelante va toda la vista -->
+    <mat-card-title>PUNTOS DE ATENCION</mat-card-title>
+   
+   
+        
+    <table mat-table class="mat-elevation-z8">
+
+      
+      </table>
+      
+      
+
+
+
+
+
+
+
+</div>

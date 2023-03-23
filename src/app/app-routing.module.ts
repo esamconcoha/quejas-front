@@ -1,3 +1,4 @@
+import { BodyComponent } from './componentes/dashboard/body/body.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path:'',redirectTo:'menu-principal',pathMatch:'full'},
   {path:'login',component:LoginComponent},
   {path:'registrarse-usuario',component:MiPrestamitoRegistrarseComponent},
+  
 
   //ruta en modo perezoso, para rutas hijas
   {path:'dashboard',

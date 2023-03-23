@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   
   collapsed=false;
-  screenWidth: 0 = 0;
+  screenWidth: number= 0;
   navData=navbarData;
 
   constructor(private tokenService: TokenService,
@@ -29,6 +29,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
   }
 
   // autenticar() {  

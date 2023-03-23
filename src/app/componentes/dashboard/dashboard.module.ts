@@ -38,7 +38,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     AsignacionQuejaComponent,
     ResolucionQuejaComponent,
     SeguimientoCentralizadorComponent,
-    ReporteAdministrativoComponent
+    ReporteAdministrativoComponent,
+  
   ],
   imports: [
     CommonModule,

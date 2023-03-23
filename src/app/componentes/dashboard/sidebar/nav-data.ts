@@ -1,3 +1,4 @@
+import { TokenService } from './../../../service/token.service';
 export const navbarData=[
 {
     routelink: '/dashboard/principal',
@@ -48,4 +49,13 @@ export const navbarData=[
     Label:'Reporte administrativo'
 
 },
+{
+    routelink: '/menu-principal',
+    icon:'fal fa-minus',
+    Label:'Salir'
+
+},
+
+
+
 ];

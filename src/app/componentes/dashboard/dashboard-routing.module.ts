@@ -1,3 +1,5 @@
+import { AsignacionQuejaComponent } from './asignacion-queja/asignacion-queja.component';
+import { BodyComponent } from './body/body.component';
 import { UsuariosPaComponent } from './usuarios-pa/usuarios-pa.component';
 import { ReporteAdministrativoComponent } from './reporte-administrativo/reporte-administrativo.component';
 import { SeguimientoCentralizadorComponent } from './seguimiento-centralizador/seguimiento-centralizador.component';
@@ -19,11 +21,12 @@ const routes: Routes = [
    {path:'puntos-atencion',component:PuntosAtencionComponent},
    {path:'usuarios-pa',component:UsuariosPaComponent},
    {path:'ingreso-queja',component:IngresoQuejaComponent},
-   {path:'asignacion-queja',component:IngresoQuejaComponent},
+   {path:'asignacion-queja',component:AsignacionQuejaComponent},
    {path:'resolucion-queja',component:ResolucionQuejaComponent},
    {path:'seguimiento-centralizador',component:SeguimientoCentralizadorComponent},
    {path:'reporte-administrativo',component:ReporteAdministrativoComponent},
    {path:'sidebar',component:SidebarComponent},
+
    {path:'principal',component:DashboardComponent},
     {path:'',redirectTo:'dashboard/principal'}
 

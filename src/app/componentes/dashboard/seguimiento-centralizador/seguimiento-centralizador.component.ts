@@ -19,4 +19,14 @@ export class SeguimientoCentralizadorComponent implements OnInit {
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
   }
+
+  getBodyClass(): string {
+    let styleclass = '';
+    if (this.isSideNavCollapsed && this.screenWidth > 768) {
+      styleclass = 'body-trimmed';
+    } else if (this.isSideNavCollapsed && this.screenWidth <= 768 && this.screenWidth > 0) {
+      styleclass = 'body-md-screen';
+    }
+    return styleclass;
+  }
 }

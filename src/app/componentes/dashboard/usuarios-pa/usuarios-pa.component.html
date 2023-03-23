@@ -1,4 +1,5 @@
 <app-sidebar (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
-<p>
-  usuarios-pa works!
-</p>
+<div class="body" [ngClass]="getBodyClass()" >
+  <router-outlet></router-outlet>
+  <h1>USUARIOS DE PUNTOS DE ATENCION</h1>
+</div>

@@ -1,4 +1,6 @@
 <app-sidebar (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
-<p>
-  asignacion-queja works!
-</p>
+<div class="body" [ngClass]="getBodyClass()" >
+  <router-outlet></router-outlet>
+  <h1>ASIGNACION DE QUEJA</h1>
+</div>
+

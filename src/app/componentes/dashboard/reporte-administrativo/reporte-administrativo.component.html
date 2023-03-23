@@ -1,13 +1,7 @@
 <app-sidebar (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
-<body>
-    <br> <br>
-<br> <br>
-<div class="text-center">
-    <h1>Quejas</h1>
-    <br> <br>
-
-</div>
-<br> <br>
+<div class="body" [ngClass]="getBodyClass()" >
+  <router-outlet></router-outlet>
+  <br> <br>
 <br> <br>
 <div class="text-center">
     <button  class="btn btn-success" class="Filtrar"> Nueva Consulta </button>
@@ -55,4 +49,9 @@
 
     </div>
 </div> 
-</body>
+
+
+</div>
+
+
+

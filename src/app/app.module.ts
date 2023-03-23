@@ -1,3 +1,4 @@
+import { BodyComponent } from './componentes/dashboard/body/body.component';
 
 //Componentes
 import { LoginComponent } from './componentes/login/login.component';
@@ -27,7 +28,8 @@ import { Interceptor } from './componentes/helpers/auth.interceptor';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    MiPrestamitoRegistrarseComponent
+    MiPrestamitoRegistrarseComponent,
+   
 
   ],
   providers: [
