@@ -1,6 +1,9 @@
 
   body{
-    background-image: url("src\assets\imagenes\Vista_exterior_edificio_BCCh_(26986595731).jpg");
+    background-image: url("src\assets\imagenes\FondoHome.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
   

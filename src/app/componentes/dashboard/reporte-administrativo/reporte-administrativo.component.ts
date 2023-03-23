@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { QuejaService } from 'src/app/service/Queja.service';
 interface SideNavToggle{
   screenWidth: number;
   collapsed:boolean;
@@ -11,14 +12,15 @@ interface SideNavToggle{
 export class ReporteAdministrativoComponent implements OnInit {
   isSideNavCollapsed=false;
   screenWidth: number = 0;
-  constructor() { }
+  constructor(
+    private quejaServicio:QuejaService
+    ) { }
 
   ngOnInit() {
+    this.traerQuejas();
+    this.obtenerEstado(1);
   }
-  onToggleSideNav(data: SideNavToggle):void{
-    this.screenWidth = data.screenWidth;
-    this.isSideNavCollapsed = data.collapsed;
-  }
+
   getBodyClass(): string {
     let styleclass = '';
     if (this.isSideNavCollapsed && this.screenWidth > 768) {
@@ -28,4 +30,22 @@ export class ReporteAdministrativoComponent implements OnInit {
     }
     return styleclass;
   }
+  onToggleSideNav(data: SideNavToggle):void{
+    this.screenWidth = data.screenWidth;
+    this.isSideNavCollapsed = data.collapsed;
+  }
+
+  traerQuejas(){
+    this.quejaServicio.listarQuejaPorPuntoAtencion(1).subscribe(dato =>{
+      console.log(dato);
+    })
+  }
+
+  obtenerEstado(estado:number){
+    this.quejaServicio.listarPorEstado(estado).subscribe(dato =>{
+      console.log(dato);
+    }
+    )
+  }
+
 }
