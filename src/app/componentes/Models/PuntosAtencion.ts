@@ -8,3 +8,8 @@ export class PuntosAtencion {
     usuariomodifico: string='';
     estado: number=0;
 }
+
+export interface PuntosAtencionList {
+    idPuntoAtencion: number;
+    nombrePuntoAtencion: string;
+}

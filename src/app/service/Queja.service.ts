@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Queja } from '../componentes/Models/Queja';
+import { MedioIngresoQueja } from '../componentes/Models/MedioIngresoQueja';
+import { PuntosAtencionList } from '../componentes/Models/PuntosAtencion';
+import { Queja, tableQueja } from '../componentes/Models/Queja';
+import { TipoQuejaList } from '../componentes/Models/TIpoQueja';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +24,22 @@ listarPorEstado(estado:number): Observable<Queja[]> {
   return this.httpClient.get<Queja[]>(`${this.baseURL}/`+`${estado}`);
 }
 
-listarQuejaPorPuntoAtencion(idPuntosAtencion:number): Observable<Queja[]> {
-  return this.httpClient.get<Queja[]>(`${this.baseURL}/Quejas-por-PuntosAtencion/`+`${idPuntosAtencion}`);
+listarQuejaPorPuntoAtencion(idPuntosAtencion:number): Observable<tableQueja[]> {
+  return this.httpClient.get<tableQueja[]>(`${this.baseURL}/QuejaporPuntosAtencion/`+`${idPuntosAtencion}`);
 }
 
+listarCatalogoMedioIngreso(): Observable<MedioIngresoQueja[]> {
+  return this.httpClient.get<MedioIngresoQueja[]>(`${this.baseURL}/medio-ingreso`);
+}
+
+
+listarCatalogoPuntosAtencion(): Observable<PuntosAtencionList[]> {
+  return this.httpClient.get<PuntosAtencionList[]>(`${this.baseURL}/puntos-atencion`);
+}
+
+listarCatalogoTipoQueja(): Observable<TipoQuejaList[]> {
+  return this.httpClient.get<TipoQuejaList[]>(`${this.baseURL}/tipo-queja`);
+}
+  
+  
 }

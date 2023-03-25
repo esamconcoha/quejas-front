@@ -33,16 +33,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th ></th>
-                <th ></th>
-                <th ></th>
-                <th ></th>
-                <th ></th>
-                <th></th>
-                <th ></th>
-                <th ></th>
-                <th ></th>
+            <tr *ngFor= "let listaQuejas of listaQuejas" >
+                <th >{{listaQuejas.correlativo}}</th>
+                <th >{{listaQuejas.puntoAtencion}}</th>
+                <th >{{listaQuejas.region}}</th>
+                <th >{{listaQuejas.estado}}</th>
+                <th >{{listaQuejas.estado}}</th>
+                <th> {{listaQuejas.medioIngreso}}</th>
+                <th >{{listaQuejas.fechaCreacion | date:'dd/MM/yyyy hh:mm:ss' }}</th>
+                <th >xd</th>
+                <th >{{listaQuejas.detalle}}</th>
             </tr>
 
         </tbody>
@@ -50,9 +50,9 @@
     <br> <br>
     <div class="text-center">
         <div class="col">
-            <button class="btn btn-success" class="Filtrar"> Imprimir</button> 
+            <button  (click)="Imprimirpdf() " class="btn btn-success" class="Filtrar"> Imprimir</button> 
 
-        <button class="btn btn-success" class="Excel"> Excel</button>
+        <button  (click)="exportexcel() " class="btn btn-success" class="Excel"> Excel</button>
         </div>
 
     </div>

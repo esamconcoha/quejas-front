@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { QuejaService } from 'src/app/service/Queja.service';
+import { MedioIngresoQueja } from '../../Models/MedioIngresoQueja';
+import { PuntosAtencionList } from '../../Models/PuntosAtencion';
+import { TipoQuejaList } from '../../Models/TIpoQueja';
 interface SideNavToggle{
   screenWidth: number;
   collapsed:boolean;
@@ -11,10 +17,29 @@ interface SideNavToggle{
 export class IngresoQuejaComponent implements OnInit {
   isSideNavCollapsed=false;
   screenWidth: number = 0;
-  constructor() { }
+  listaMedioIngreso: MedioIngresoQueja[] = [];
+  listaPuntosAtencion: PuntosAtencionList[] = [];
+  listaTipoQueja: TipoQuejaList[] = [];
+  formularioCreacionQueja: FormGroup= this.formBuilder.group({
+    medioIngresoQueja: ['', [Validators.required]],
+    nombreCuenta: ['', [Validators.required]],
+    correoElectronico: ['', [Validators.required]],
+    telefono: ['', [Validators.required]],
+    puntoAtencion: ['', [Validators.required]],
+    tipoQueja: ['', [Validators.required]],
+    detalleQueja: ['', [Validators.required]],
+  })
+
+  constructor(private router: Router,private formBuilder:FormBuilder, private quejaServicio: QuejaService) { }
 
   ngOnInit() {
+    this.listarMedioIngresoQueja();
+    this.listarPuntosAtencion();
+    this.listarTipoQueja();
   }
+
+
+
 
   onToggleSideNav(data: SideNavToggle):void{
     this.screenWidth = data.screenWidth;
@@ -30,5 +55,31 @@ export class IngresoQuejaComponent implements OnInit {
     }
     return styleclass;
   }
+
+  listarMedioIngresoQueja(){
+    this.quejaServicio.listarCatalogoMedioIngreso().subscribe(dato =>{
+      console.log(dato);
+      this.listaMedioIngreso = dato;
+
+    }
+    )
+  }
+
+  listarPuntosAtencion(){
+    this.quejaServicio.listarCatalogoPuntosAtencion().subscribe(dato =>{
+      this.listaPuntosAtencion = dato;
+      console.log(dato);
+    }
+    )
+  }
+
+  listarTipoQueja(){
+    this.quejaServicio.listarCatalogoTipoQueja().subscribe(dato =>{
+      this.listaTipoQueja = dato;
+      console.log(dato);
+    }
+    )
+  }
+
 
 }

@@ -1,5 +1,94 @@
 <app-sidebar (onToggleSideNav)="onToggleSideNav($event)"></app-sidebar>
 <div class="body" [ngClass]="getBodyClass()" >
   <router-outlet></router-outlet>
-  <h1>INGRESO DE QUEJA POR USUARIO INTERNO</h1>
+  <div class="text-center">
+    <h1>Ingreso de Queja</h1>
+    <br> <br>
+
+    <mat-card > 
+      <form [formGroup]="formularioCreacionQueja">
+        <br> <br>
+        <div class="row ">
+          <div class="col">
+            <mat-form-field appearance="standard" style="width:300px">
+              <label for="dpi">Me¿dio Ingreso Queja </label>
+              <mat-select formControlName="medioIngresoQueja">
+                <mat-option>Selecciona una opcion...</mat-option>
+                <mat-option *ngFor="let listaMedioIngreso of listaMedioIngreso"  [value]="listaMedioIngreso.idMedioIngresoQueja">{{listaMedioIngreso.nombreMedio}}</mat-option>
+            </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="standard" style="width:300px">
+              <label for="nombreCuenta">Nombre </label>
+              <input matInput type="text" maxlength="100" formControlName="nombreCuenta" required placeholder="[a-zA-Z]{1,50}"
+                placeholder="Digite sus Nombres">
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row ">
+          <div class="col">
+            <mat-form-field appearance="standard" style="width:300px">
+              <label for="telefono">Numero de telefono </label>
+              <input matInput type="number" required placeholder="[0,9]{1,8}" formControlName="telefono" requird
+                placeholder="99999999">
+            </mat-form-field>
+          </div>
+  
+          <div class="col">
+            <mat-form-field appearance="standard" style="width:300px">
+              <label for="correoElectronico">Correo </label>
+              <input matInput type="email" formControlName="correoElectronico" requird placeholder="Digite su correo electronico"
+                required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+            </mat-form-field>
+          </div>
+  
+         
+        </div>
+  
+  
+        <div class="row ">
+
+          <div class="col">
+            <mat-form-field appearance="standard" style="width:300px">
+              <label for="puntoAtencion">Punto de Atencion</label>
+              <mat-select formControlName="puntoAtencion">
+                <mat-option>Selecciona una opcion...</mat-option>
+                <mat-option *ngFor="let listaPuntosAtencion of listaPuntosAtencion"  [value]="listaPuntosAtencion.idPuntoAtencion">{{listaPuntosAtencion.nombrePuntoAtencion}}</mat-option>
+            </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field appearance="standard" style="width:300px">
+              <label for="tipoQueja">Tipo de Queja </label>
+              <mat-select formControlName="tipoQueja">
+                <mat-option>Selecciona una opcion...</mat-option>
+                <mat-option *ngFor="let listaTipoQueja of listaTipoQueja"  [value]="listaTipoQueja.idTipoQueja">{{listaTipoQueja.siglasQueja}} {{listaTipoQueja.descripcionQueja}}</mat-option>
+            </mat-select>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="text-center">
+            <mat-form-field class="campo-identificacion">
+              <mat-label> Detalle de la Queja</mat-label>
+              <textarea matInput formControlName="detalleQueja" maxlength="1000"  ></textarea>
+            </mat-form-field>
+          </div>       
+        </div>
+  
+        <br> <br>
+        <div class="row justify-content-md-center">
+          <button class="btn btn-success" class="Filtrar"> Guardar </button>
+        </div>
+      
+      </form>
+
+    </mat-card>
+
+</div>
 </div>

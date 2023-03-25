@@ -1,5 +1,6 @@
 export class Queja {
     idQueja: number=0;
+    correlativo: string='';
     idMedioIngresoQueja: number=0;
     idPuntoAtencion: number=0;
     fechaHoraIngreso: string='';
@@ -10,4 +11,15 @@ export class Queja {
     usuariomodifico: string='';
     idTipoQueja: number=0;
     idEstado: number=0;
+}
+
+export interface tableQueja {
+    correlativo: string;
+    puntoAtencion: string;
+    region: string;
+    estado: string;
+    medioIngreso: string;
+    fechaCreacion: string;
+    detalle: string;
+
 }
