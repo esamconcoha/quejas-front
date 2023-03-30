@@ -16,6 +16,8 @@ interface SideNavToggle{
 export class ReporteAdministrativoComponent implements OnInit {
   isSideNavCollapsed=false;
   screenWidth: number = 0;
+  public elementosPorPagina = 5;
+  public paginaActual = 1;
 
   listaQuejas: tableQueja[] = [];
   constructor(
@@ -25,7 +27,31 @@ export class ReporteAdministrativoComponent implements OnInit {
   ngOnInit() {
     this.traerQuejas();
   }
+  
+  public obtenerElementosPorPagina(): any[] {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+    return this.listaQuejas.slice(inicio, fin);
+  }
 
+
+  public retrocederPagina(): void {
+    if (this.paginaActual > 1) {
+      this.paginaActual--;
+    }
+  }
+  
+  public avanzarPagina(): void {
+    if (this.paginaActual < this.numeroDePaginas()) {
+      this.paginaActual++;
+    }
+  }
+  
+  public numeroDePaginas(): number {
+    return Math.ceil(this.listaQuejas.length / this.elementosPorPagina);
+  }
+
+  
   getBodyClass(): string {
     let styleclass = '';
     if (this.isSideNavCollapsed && this.screenWidth > 768) {
@@ -35,6 +61,8 @@ export class ReporteAdministrativoComponent implements OnInit {
     }
     return styleclass;
   }
+
+
   onToggleSideNav(data: SideNavToggle):void{
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;

@@ -1,16 +1,19 @@
 export class Queja {
-    idQueja: number=0;
-    correlativo: string='';
+    idQueja?: number=0;
+    nombre: string='';
+    correo: string='';
+    telefono: string='';
+    correlativo?: string='';
     idMedioIngresoQueja: number=0;
     idPuntoAtencion: number=0;
-    fechaHoraIngreso: string='';
+    fechaHoraIngreso?: string='';
     detalleQueja: string='';
     usuariocreo: string='';
-    fechacreacion: string='';
-    fechamodificacion: string='';
-    usuariomodifico: string='';
+    fechacreacion?: string='';
+    fechamodificacion?: string='';
+    usuariomodifico?: string='';
     idTipoQueja: number=0;
-    idEstado: number=0;
+    idEstado?: number=0;
 }
 
 export interface tableQueja {

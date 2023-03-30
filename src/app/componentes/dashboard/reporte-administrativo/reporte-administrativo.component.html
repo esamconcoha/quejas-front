@@ -18,7 +18,7 @@
 </div>
 <br> <br>
 <div class="centrar">
-    <table class="table table-striped text-center" id="table">
+    <table  class="table table-striped text-center" id="table">
         <thead class="table-dark">
             <tr>
                 <th>No. de Queja</th>
@@ -33,7 +33,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor= "let listaQuejas of listaQuejas" >
+            <tr *ngFor= "let listaQuejas of obtenerElementosPorPagina()" >
                 <th >{{listaQuejas.correlativo}}</th>
                 <th >{{listaQuejas.puntoAtencion}}</th>
                 <th >{{listaQuejas.region}}</th>
@@ -47,6 +47,12 @@
 
         </tbody>
     </table>
+      <div>
+        <button   class="Filtrar2" (click)="retrocederPagina()"> Anterior </button>
+        <span  style="font-size: 10;">    Página {{ paginaActual }} de {{ numeroDePaginas() }}  </span>
+        <button  class="Filtrar2"  (click)="avanzarPagina()"> Siguiente ></button>
+      </div>
+  
     <br> <br>
     <div class="text-center">
         <div class="col">

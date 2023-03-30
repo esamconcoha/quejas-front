@@ -57,6 +57,18 @@ h2{
     background-color:#0C6187;
     border-color: white;
   } 
+
+  .Filtrar2{
+    width: 100px;
+    height: 25px;
+    font-family: 'Roboto MEdium', Courier, monospace;
+    font-size: 10pt;
+    color:black;
+    background-color:white;
+    border-color: white;
+  }
+
+
   .Excel{
     width: 175px;
     height: 50px;

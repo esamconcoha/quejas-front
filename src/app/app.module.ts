@@ -22,7 +22,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './componentes/helpers/auth.interceptor';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +52,8 @@ import { Interceptor } from './componentes/helpers/auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
 
   ]
 
