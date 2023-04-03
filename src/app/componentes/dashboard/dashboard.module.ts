@@ -1,3 +1,5 @@
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AgregarPuntoComponent } from './puntos-atencion/agregar-punto/agregar-punto.component';
 import { ReporteAdministrativoComponent } from './reporte-administrativo/reporte-administrativo.component';
 import { SeguimientoCentralizadorComponent } from './seguimiento-centralizador/seguimiento-centralizador.component';
 import { ResolucionQuejaComponent } from './resolucion-queja/resolucion-queja.component';
@@ -17,7 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -26,7 +28,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { ModificarPuntoComponent } from './puntos-atencion/modificar-punto/modificar-punto.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -39,7 +42,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ResolucionQuejaComponent,
     SeguimientoCentralizadorComponent,
     ReporteAdministrativoComponent,
-  
+    AgregarPuntoComponent,
+    ModificarPuntoComponent
   ],
   imports: [
     CommonModule,
@@ -53,11 +57,16 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
+    MatSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    MatPaginatorModule
+
+    MatPaginatorModule,
+    MatDialogModule,
+   
+
   ]
 })
 export class DashboardModule { }

@@ -21,3 +21,22 @@
     width: (100%-5rem);
     margin-left: 5rem;
 }
+.mat-card-title{
+    justify-content: center;
+    text-align: center;
+   
+    height: 35px;
+   
+}
+
+.dropdown{
+    margin-left: 450px;
+}
+
+.btn{
+    margin-left: 50px;
+}
+h5.modal-title {
+    font-size: 24px;
+    
+  }
