@@ -8,6 +8,9 @@ import { MedioIngresoQueja } from '../../Models/MedioIngresoQueja';
 import { PuntosAtencionList } from '../../Models/PuntosAtencion';
 import { Queja } from '../../Models/Queja';
 import { TipoQuejaList } from '../../Models/TIpoQueja';
+import { Observable } from 'rxjs';
+import { FileServiceService } from 'src/app/service/FileService.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 interface SideNavToggle{
   screenWidth: number;
   collapsed:boolean;
@@ -32,12 +35,19 @@ export class IngresoQuejaComponent implements OnInit {
     tipoQueja: ['', [Validators.required]],
     detalleQueja: ['', [Validators.required]],
   })
+  selectedFiles?: FileList;
+  progressInfos: { value: number, fileName: string }[] = [];
+  message = '';
+  filename = '';
+  fileInfos?: Observable<any>;
+  correlativo: string = '';
 
   constructor(
     private router: Router,
     private formBuilder:FormBuilder,
      private quejaServicio: QuejaService,
-     private tokenService: TokenService) { }
+     private tokenService: TokenService,
+     private FileService: FileServiceService) { }
 
   ngOnInit() {
     this.listarMedioIngresoQueja();
@@ -78,7 +88,8 @@ export class IngresoQuejaComponent implements OnInit {
   guardarQueja(queja?: Queja) {
       this.quejaServicio.guardarQUeja(queja!).subscribe(dato => {
         console.log(dato);
-        Swal.fire('Exito', `La queja fue Ingresada exitosamente`, `success`)
+        this.correlativo = dato.correlativo!;
+        Swal.fire('Exito', `La queja  ${this.correlativo} fue Ingresada exitosamente`, `success`)
       },error => Swal.fire('ERROR', `Hubo problemas al crear la Queja, por favor intente de nuevo`, `error`))
   }
 
@@ -110,6 +121,7 @@ export class IngresoQuejaComponent implements OnInit {
 
     if(this.formularioCreacionQueja.valid){
         this.crearQueja();
+        this.uploadFiles();
     }else{
       this.formularioCreacionQueja.markAllAsTouched();
     }
@@ -162,6 +174,42 @@ export class IngresoQuejaComponent implements OnInit {
     return this.formularioCreacionQueja.get('detalleQueja');
   }
 
+  selectFiles(event: any): void {
+    this.progressInfos = [];
+    event.target.files.length == 1 ? this.filename == event.target.files[0].name : this.filename = event.target.files.length + 'archivos_seleccionados';
+    this.selectedFiles = event.target.files;
+  }
+
+
+  uploadFiles(): void {
+    this.message = '';
+    if (this.selectedFiles) {
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+        this.upload(i, this.selectedFiles[i]);
+      }
+    }
+  }
+
+  upload(idx: number, file: File): void {
+
+    this.progressInfos[idx] = { value: 0, fileName: file.name };
+    this.FileService.uploadFile(file).subscribe( event =>
+      {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
+        } else if (event instanceof HttpResponse) {
+          this.fileInfos = this.FileService.getFiles();
+        }
+  
+      },
+  
+      err => {
+        this.progressInfos[idx].value = 0;
+        this.message = 'No se puede subir el archivo:' + file.name;
+      }
+    );
+  
+  }
 
 
 }

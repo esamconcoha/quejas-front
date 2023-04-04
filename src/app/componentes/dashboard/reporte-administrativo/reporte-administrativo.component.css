@@ -24,14 +24,10 @@ h2{
     color:Black;
     font-size: 40pt;
   }
-  th {
-    border: 1px solid black;
-    word-wrap: break-word;
-  }
 
-  .idtable{
-    width: 25px;
-    word-wrap: break-word;
+  .cabecera-tabla {
+    background-color: #0C6187;
+    color: white;
   }
   
   .centrar {

@@ -28,30 +28,33 @@ export class ReporteAdministrativoComponent implements OnInit {
     this.traerQuejas();
   }
   
+  //Metodos para la paginacion
   public obtenerElementosPorPagina(): any[] {
     const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
     const fin = inicio + this.elementosPorPagina;
     return this.listaQuejas.slice(inicio, fin);
   }
 
-
+  //Metodos para la paginacion
   public retrocederPagina(): void {
     if (this.paginaActual > 1) {
       this.paginaActual--;
     }
   }
   
+  //Metodos para la paginacion
   public avanzarPagina(): void {
     if (this.paginaActual < this.numeroDePaginas()) {
       this.paginaActual++;
     }
   }
+  //Metodos para la paginacion
   
   public numeroDePaginas(): number {
     return Math.ceil(this.listaQuejas.length / this.elementosPorPagina);
   }
 
-  
+  //metodo del body para el dashboard
   getBodyClass(): string {
     let styleclass = '';
     if (this.isSideNavCollapsed && this.screenWidth > 768) {
@@ -68,12 +71,13 @@ export class ReporteAdministrativoComponent implements OnInit {
     this.isSideNavCollapsed = data.collapsed;
   }
 
+  //Metodo para traer las quejas
   traerQuejas(){
     this.quejaServicio.listarQuejaPorPuntoAtencion(1).subscribe(dato =>{
       this.listaQuejas = dato;
     })
   }
-
+//Metodo para descargar el pdf
   Imprimirpdf() {
     var doc = new jsPDF();
     autoTable(doc,{html:"table"});

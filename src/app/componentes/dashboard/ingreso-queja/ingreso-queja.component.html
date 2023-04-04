@@ -88,15 +88,22 @@
         </div>
   
         <br>
-        <div class="text-center">
-           <mat-label >Documento de queja.... </mat-label>
-           <input type="file" accept=".pdf,.doc,.docx">
+        <div id="box2">
+          <!-- <button  mat-raised-button id="selectButton" (click)="fileImput.click()" >Seleccionar Archivo</button> -->
+          <input type="file" #fileImput accept="application/pdf" (change)="selectFiles($event)" />
+          <span id="filename">
+            {{filename}}
+          </span>
+
         </div>
-       
+        
+        <div id="box3">
+            <span>{{message}}</span>
+        </div>
        <br>
         <br> <br>
         <div class="row justify-content-md-center">
-          <button class="btn btn-success Filtrar" (click)="validarFormulario()" > Guardar </button>
+          <button class="btn btn-success Filtrar" id="uploadButton" (click)="validarFormulario()" > Guardar </button>
         </div>
       
       </form>

@@ -19,7 +19,9 @@ guardarQUeja(queja:Queja): Observable<Queja> {
   return this.httpClient.post<Queja>(`${this.baseURL}/guardar`, queja);
 }
 
-
+listarQuejaId(id: number): Observable<Queja> {
+  return this.httpClient.get<Queja>(`${this.baseURL}/correlativo` + `/${id}`);
+}
 listarPorEstado(estado:number): Observable<Queja[]> {
   return this.httpClient.get<Queja[]>(`${this.baseURL}/`+`${estado}`);
 }
