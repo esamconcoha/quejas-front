@@ -23,12 +23,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './componentes/helpers/auth.interceptor';
 import {MatPaginatorModule} from '@angular/material/paginator';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
     MiPrestamitoRegistrarseComponent,
+  
    
 
   ],

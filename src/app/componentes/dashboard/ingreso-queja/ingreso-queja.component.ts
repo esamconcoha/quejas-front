@@ -6,7 +6,7 @@ import { TokenService } from 'src/app/service/token.service';
 import Swal from 'sweetalert2';
 import { MedioIngresoQueja } from '../../Models/MedioIngresoQueja';
 import { PuntosAtencionList } from '../../Models/PuntosAtencion';
-import { Queja } from '../../Models/Queja';
+import { Queja, Correlativo } from '../../Models/Queja';
 import { TipoQuejaList } from '../../Models/TIpoQueja';
 import { Observable } from 'rxjs';
 import { FileServiceService } from 'src/app/service/FileService.service';
@@ -87,9 +87,11 @@ export class IngresoQuejaComponent implements OnInit {
 
   guardarQueja(queja?: Queja) {
       this.quejaServicio.guardarQUeja(queja!).subscribe(dato => {
-        console.log(dato);
-        this.correlativo = dato.correlativo!;
-        Swal.fire('Exito', `La queja  ${this.correlativo} fue Ingresada exitosamente`, `success`)
+        this.quejaServicio.getCorrelativo(dato.idQueja!).subscribe(dato =>{
+          this.correlativo = dato.correlativo;
+          console.log(this.correlativo);
+          Swal.fire('Exito', `La queja  ${this.correlativo} fue Ingresada exitosamente`, `success`)
+        })     
       },error => Swal.fire('ERROR', `Hubo problemas al crear la Queja, por favor intente de nuevo`, `error`))
   }
 

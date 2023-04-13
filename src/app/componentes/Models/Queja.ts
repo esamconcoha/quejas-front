@@ -26,3 +26,7 @@ export interface tableQueja {
     detalle: string;
 
 }
+
+export interface Correlativo{
+    correlativo: string;
+}
