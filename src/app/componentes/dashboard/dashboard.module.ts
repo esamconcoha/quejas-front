@@ -30,6 +30,11 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ModificarPuntoComponent } from './puntos-atencion/modificar-punto/modificar-punto.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { TipoQuejasComponent } from './tipo-quejas/tipo-quejas.component';
+import { AgregarTipoComponent } from './tipo-quejas/agregar-tipo/agregar-tipo.component';
+import { modificarPunto } from '../Models/PuntosAtencion';
+import { ModificarTipoComponent } from './tipo-quejas/modificar-tipo/modificar-tipo.component';
+import { AgregarUsuarioComponent } from './usuarios-pa/agregar-usuario/agregar-usuario.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -43,7 +48,11 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     SeguimientoCentralizadorComponent,
     ReporteAdministrativoComponent,
     AgregarPuntoComponent,
-    ModificarPuntoComponent
+    ModificarPuntoComponent,
+    TipoQuejasComponent,
+    AgregarTipoComponent,
+   ModificarTipoComponent,
+   AgregarUsuarioComponent
   ],
   imports: [
     CommonModule,

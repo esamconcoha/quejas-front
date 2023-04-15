@@ -11,6 +11,7 @@
     padding: 3rem;
 
 }
+
 .body-trimmed{
     width: (100%-16.5625rem);
     margin-left: 16.5625rem;
@@ -32,11 +33,9 @@
     text-align: center;
     height: 35px;
 }
-
 .add{
     justify-content: center;
 }
-
 .Filtrar{
     width: 175px;
     height: 50px;

@@ -111,7 +111,7 @@ export class ModificarPuntoComponent implements OnInit {
 
     this.service.modificarPunto(this.idPuntoAtencion,puntoModificado).toPromise().then(PUNTO=>{
       Swal.fire({
-        titleText: `Se ha Modificado el punto de atención con éxito.`,
+        titleText: `Datos Actualizados`,
         icon: 'success',
         showCloseButton: true,
         showConfirmButton: false
@@ -126,6 +126,8 @@ export class ModificarPuntoComponent implements OnInit {
   onCancelar(): void {
     this.dialogRef.close();
   }
+
+  
 
 
 }

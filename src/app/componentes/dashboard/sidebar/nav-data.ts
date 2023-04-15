@@ -20,6 +20,12 @@ export const navbarData=[
 
 },
 {
+    routelink: '/dashboard/tipo-queja',
+    icon:'fal fa-file',
+    Label:'tipos de quejas para auto consultas.'
+
+},
+{
     routelink: '/dashboard/ingreso-queja',
     icon:'fal fa-exclamation-triangle',
     Label:'Ingreso de queja de usuarios'

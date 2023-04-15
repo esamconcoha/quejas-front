@@ -11,6 +11,7 @@ import { PuntosAtencionComponent } from './puntos-atencion/puntos-atencion.compo
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
+import { TipoQuejasComponent } from './tipo-quejas/tipo-quejas.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
    {path:'seguimiento-centralizador',component:SeguimientoCentralizadorComponent},
    {path:'reporte-administrativo',component:ReporteAdministrativoComponent},
    {path:'sidebar',component:SidebarComponent},
-
+    {path:'body',component:BodyComponent},
+    {path:'tipo-queja',component:TipoQuejasComponent},
    {path:'principal',component:DashboardComponent},
     {path:'',redirectTo:'dashboard/principal'}
 
