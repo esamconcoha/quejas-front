@@ -6,10 +6,10 @@ export class Usuario {
     correo?:string="";
     id_cargo?:number=0;
     estado?:number=0;
-    usuariocreo?:number=0;
+    usuariocreo?:string="";
     fechacreacion?:string="";
     fechamodificacion?:string="";
-    usuariomodifico?:number=0;
+    usuariomodifico?:string="";
     password?:string="";
     rol?:number=0;
     idpuntoatencion?:any=null;
@@ -42,3 +42,4 @@ export interface traerCargo{
     idCargo:number;
     nombreCargo:string;
 }
+

@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class ModificarTipoComponent implements OnInit {
 
   idTipoQueja: number;
+  contadorSiglas:any;
   constructor(
     private service: TipoQuejaService,
     private dialogRef: MatDialogRef<ModificarTipoComponent>,
@@ -40,6 +41,23 @@ export class ModificarTipoComponent implements OnInit {
     this.dialogRef.close();
   }
   
+
+  validarExistencia(){
+    let siglasQueja = this.formularioModificarTipo.get('siglasQueja')?.value;
+    this.service.contadorSiglas(siglasQueja).subscribe((data) => {
+      this.contadorSiglas=data;
+      if(this.contadorSiglas.count > 1){
+        Swal.fire({
+          title: 'Error',
+          text: 'Ya existe un tipo de queja con estas siglas.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }else{
+        this.alertar();
+      }
+    });
+  }
 
   alertar(){
     Swal.fire({
@@ -88,7 +106,7 @@ export class ModificarTipoComponent implements OnInit {
     }
     this.service.modificarTipoQueja(this.idTipoQueja,modificarPuntos).toPromise().then(PUNTO=>{
       Swal.fire({
-        titleText: `Se ha Modificado el punto de atención con éxito.`,
+        titleText: `Se ha Modificado el tipo de queja con éxito.`,
         icon: 'success',
         showCloseButton: true,
         showConfirmButton: false

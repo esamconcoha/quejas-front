@@ -4,6 +4,7 @@ import { UsuarioService } from 'src/app/service/Usuario.service';
 import { Usuario, tablaUsuario } from '../../Models/usuario';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
+import { ModificarUsuarioComponent } from './modificar-usuario/modificar-usuario.component';
 
 interface SideNavToggle{
   screenWidth: number;
@@ -89,5 +90,14 @@ export class UsuariosPaComponent implements OnInit {
         this.dialog.open(AgregarUsuarioComponent, dialogConfig);
       }
       
+
+      openDialogEditar(idUsuario: number){
+        const dialogConfig = new MatDialogConfig();
+       
+        dialogConfig.maxWidth = '1500px'; // establece el ancho máximo de la ventana a 800px
+        dialogConfig.width = '1000px';// establece el ancho de la ventana a 600px
+        dialogConfig.data = { idUsuario:idUsuario}; 
+        this.dialog.open(ModificarUsuarioComponent, dialogConfig);
+      }
 
 }

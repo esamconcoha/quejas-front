@@ -28,3 +28,6 @@ export class modificarTipoQueja{
     usuarioModifico?: string='';
 }
 
+export class contadorSiglas{
+    contador:number=0;
+}
