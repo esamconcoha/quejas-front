@@ -65,27 +65,8 @@ private cachePuntosAtencion!: PuntosAtencionList[];
 
 
 listarCatalogoPuntosAtencion(): Observable<PuntosAtencionList[]> {
-  if (this.cachePuntosAtencion) {
-    console.log("se obtuvo de cache 1d");
-    return of(this.cachePuntosAtencion);
-    
-  }
-  const cachedDataRazon = localStorage.getItem('cachePuntosAtencion');
-  if (cachedDataRazon) {
-    this.cachePuntosAtencion = JSON.parse(cachedDataRazon);
-    console.log("se obtuvo de cache");
-    return of(this.cachePuntosAtencion);
-  
-  }
-  return this.httpClient.get<PuntosAtencionList[]>(`${this.baseURL}/puntos-atencion`).pipe(
-    tap(data => {
-      console.log(data);
-      this.cachePuntosAtencion = data;
-      localStorage.setItem('cachePuntosAtencion', JSON.stringify(data));
-    })
-  );
 
-
+  return this.httpClient.get<PuntosAtencionList[]>(`${this.baseURL}/puntos-atencion`)
 }
 
 listarCatalogoTipoQueja(): Observable<TipoQuejaList[]> {

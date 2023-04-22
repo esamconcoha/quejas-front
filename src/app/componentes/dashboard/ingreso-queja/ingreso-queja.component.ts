@@ -91,6 +91,7 @@ export class IngresoQuejaComponent implements OnInit {
           this.correlativo = dato.correlativo;
           console.log(this.correlativo);
           Swal.fire('Exito', `La queja  ${this.correlativo} fue Ingresada exitosamente`, `success`)
+          this.formularioCreacionQueja.reset();
         })     
       },error => Swal.fire('ERROR', `Hubo problemas al crear la Queja, por favor intente de nuevo`, `error`))
   }
