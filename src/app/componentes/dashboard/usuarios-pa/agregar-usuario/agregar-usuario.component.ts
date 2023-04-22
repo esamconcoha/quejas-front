@@ -1,3 +1,4 @@
+import { TokenService } from './../../../../service/token.service';
 import { Usuario, traerCargo } from './../../../Models/usuario';
 import { UsuarioService } from 'src/app/service/Usuario.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,17 +24,20 @@ traerCargo: traerCargo[]=[];
   constructor(
     private service: UsuarioService,
     private formBuilder:FormBuilder,
+    private tokenService: TokenService
   ) { 
 
     this.crearUserForm= this.formBuilder.group({
-      idpuntoatencion:[],
+     
       dpi: [],
       Nombre: [],
       apellidos: [],
-      correo: [],
+      correo: ['',[Validators.required, Validators.email]],
       password: [],
       numeroTelefono: [],
-      id_cargo:[]
+      id_cargo:[],
+      idPuntoatencion:[]
+      
       
     })
   }
@@ -66,23 +70,42 @@ guardarUsuario(user?: Usuario) {
 }
 
 CrearUsuario(): void {
-  let fecha = new Date();
+  let fecha = new Date();69
   let desdeStr = `${fecha.getDate()}-${('0' + (fecha.getMonth() + 1)).slice(-2)}-${fecha.getFullYear()}`;
+
+let rol:number=0;
+const id_cargo= this.crearUserForm.get("id_cargo")?.value;
+if(id_cargo===6){
+  rol=3;
+}else if(id_cargo===2 || id_cargo===3 || id_cargo===4){
+  rol=2;
+}else if(id_cargo===1){
+  rol=1;
+}else if(id_cargo===7){
+  rol=4;
+}else if(id_cargo===5){
+  rol=2;
+}else{
+  rol=0;
+}
+
+
+
   const user: Usuario = {
     idusuario: 0,
     dpi: this.crearUserForm.get("dpi")?.value,
     nombre: this.crearUserForm.get("Nombre")?.value,
     apellidos: this.crearUserForm.get("apellidos")?.value,
     correo: this.crearUserForm.get("correo")?.value,
-    id_cargo: this.crearUserForm.get("id_cargo")?.value,
+    id_cargo: id_cargo,
     estado: 1,
-    usuariocreo:  this.crearUserForm.get("dpi")?.value,
+    usuariocreo:  this.tokenService.getUserName(),
     fechacreacion: desdeStr,
     fechamodificacion: desdeStr,
-    usuariomodifico:  this.crearUserForm.get("dpi")?.value,
+    usuariomodifico:  this.tokenService.getUserName(),
     password: this.crearUserForm.get("password")?.value,
-    /* rol: 6, */
-    idpuntoatencion: this.crearUserForm.get("idpuntoatencion")?.value,
+    rol: rol, 
+    idpuntoatencion: this.crearUserForm.get("idPuntoatencion")?.value,
     telefono: this.crearUserForm.get("numeroTelefono")?.value
   }
   Swal.fire({
@@ -102,6 +125,9 @@ CrearUsuario(): void {
   })
 }
 
+get correoElectronicoField(){
+  return this.crearUserForm.get('correo');
+} 
 
 }
 

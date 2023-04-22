@@ -1,3 +1,4 @@
+import { contadorSiglas } from './../../../Models/TIpoQueja';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -16,6 +17,7 @@ export class AgregarTipoComponent implements OnInit {
 
   openModal: any;
   crearTpForm:FormGroup;
+  contadorSiglas:any
 
   constructor(
     private service: TipoQuejaService,
@@ -36,6 +38,23 @@ export class AgregarTipoComponent implements OnInit {
 
   onCancelar(): void {
     this.dialogRef.close();
+  }
+
+  validarExistencia(){
+    let siglasQueja = this.crearTpForm.get('siglasQueja')?.value;
+    this.service.contadorSiglas(siglasQueja).subscribe((data) => {
+      this.contadorSiglas=data;
+      if(this.contadorSiglas.count >= 1){
+        Swal.fire({
+          title: 'Error',
+          text: 'Ya existe un tipo de queja con estas siglas.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }else{
+        this.agregarTipo();
+      }
+    });
   }
 
   agregarTipo(){

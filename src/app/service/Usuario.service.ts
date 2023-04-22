@@ -33,5 +33,10 @@ cargo():Observable<traerCargo[]>{
   return this.httpClient.get<traerCargo[]>(`${this.baseURL}/traerCargo`);
 }
 
+modificarUsuario(idUsuario: number, usuarioModificado:Usuario):Observable<Usuario>{
+  return this.httpClient.put<Usuario>(`${this.baseURL}/modificarUsuario/${idUsuario}`, usuarioModificado);
+}
+
+
 
 }
