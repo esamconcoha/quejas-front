@@ -20,9 +20,12 @@ interface SideNavToggle{
   templateUrl: './ingreso-queja.component.html',
   styleUrls: ['./ingreso-queja.component.css']
 })
+
+
 export class IngresoQuejaComponent implements OnInit {
   isSideNavCollapsed=false;
   screenWidth: number = 0;
+  nombreArchivo: string = '';
   listaMedioIngreso: MedioIngresoQueja[] = [];
   listaPuntosAtencion: PuntosAtencionList[] = [];
   listaTipoQueja: TipoQuejaList[] = [];
@@ -91,7 +94,10 @@ export class IngresoQuejaComponent implements OnInit {
           this.correlativo = dato.correlativo;
           console.log(this.correlativo);
           Swal.fire('Exito', `La queja  ${this.correlativo} fue Ingresada exitosamente`, `success`)
+          this.nombreArchivo =this.correlativo;
+          this.uploadFiles();
           this.formularioCreacionQueja.reset();
+        
         })     
       },error => Swal.fire('ERROR', `Hubo problemas al crear la Queja, por favor intente de nuevo`, `error`))
   }
@@ -121,10 +127,9 @@ export class IngresoQuejaComponent implements OnInit {
   }
 
   validarFormulario(){
-
     if(this.formularioCreacionQueja.valid){
         this.crearQueja();
-        this.uploadFiles();
+       
     }else{
       this.formularioCreacionQueja.markAllAsTouched();
     }
@@ -194,9 +199,9 @@ export class IngresoQuejaComponent implements OnInit {
   }
 
   upload(idx: number, file: File): void {
-
+    console.log(this.nombreArchivo)
     this.progressInfos[idx] = { value: 0, fileName: file.name };
-    this.FileService.uploadFile(file).subscribe( event =>
+    this.FileService.uploadFile(file, this.nombreArchivo).subscribe( event =>
       {
         if (event.type === HttpEventType.UploadProgress) {
           this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);

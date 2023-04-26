@@ -49,6 +49,7 @@ ingresar(){
     })
     this.tokenService.setToken(token.jwt);
     this.tokenService.setUserName(token.nombre);
+    this.tokenService.setRol(token.rol);
     this.router.navigateByUrl('/dashboard/principal');
   },error => Swal.fire('ERROR', `El usuario y/o la contraseña ingresados son incorrectos por favor intente de nuevo`, `error`))
 

@@ -9,10 +9,10 @@ export class FileServiceService {
   private baseURL = "http://localhost:8081/Mi-prestamito/api/files";
 constructor(private httpClient: HttpClient) { }
 
-uploadFile(file: File): Observable<any> {
+uploadFile(file: File,correlativo:string): Observable<any> {
   const formData: FormData = new FormData();
   formData.append('files', file);
-  return this.httpClient.post<any>(`${this.baseURL}/upload`, formData);
+  return this.httpClient.post<any>(`${this.baseURL}/upload/${correlativo}`, formData);
 }
 
 

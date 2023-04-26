@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 const USER_TOKEN = 'auth-token';
 const USER_NAME = 'auth-user';
+const USER_ROL = 'auth-rol';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +27,15 @@ public setUserName(username: string): void {
 }
 
 
+
+public setRol(rol: string): void {
+  window.sessionStorage.removeItem(USER_ROL);
+  window.sessionStorage.setItem(USER_ROL, rol);
+}
+
+public getRol(): string {
+  return sessionStorage.getItem(USER_ROL)!;
+}
 public getUserName(): string {
   return sessionStorage.getItem(USER_NAME)!;
 }
