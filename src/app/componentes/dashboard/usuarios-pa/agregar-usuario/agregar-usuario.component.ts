@@ -63,7 +63,7 @@ traerCargos(){
 
 guardarUsuario(user?: Usuario) {
   this.service.registrarUsuario(user!).toPromise().then(dato => {
-    Swal.fire('Usuario Creado', `El Usuario ${user!.nombre} ${user!.apellidos} ha sido creado con exito`, `success`)
+    Swal.fire('Se guardaron correctamente los datos del usuario para el punto de atención')
     console.log(dato);
     
   },error => Swal.fire('ERROR', `Hubo problemas al crear el Usuario, Porfavor intenta de nuevo`, `error`))
