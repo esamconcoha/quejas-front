@@ -7,6 +7,7 @@ import { TokenService } from 'src/app/service/token.service';
 import { AgregarPuntoComponent } from '../../puntos-atencion/agregar-punto/agregar-punto.component';
 import Swal from 'sweetalert2';
 import { tipoQueja } from 'src/app/componentes/Models/TIpoQueja';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-tipo',
@@ -23,7 +24,8 @@ export class AgregarTipoComponent implements OnInit {
     private service: TipoQuejaService,
     private formBuilder:FormBuilder,
     private dialogRef: MatDialogRef<AgregarPuntoComponent>,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router
   ) { 
 
     this.crearTpForm= this.formBuilder.group({
@@ -40,6 +42,19 @@ export class AgregarTipoComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  validarFormulario(){
+    if (this.crearTpForm.invalid) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor complete los campos obligatorios.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }else{
+      this.validarExistencia();
+    }
+  }
+
   validarExistencia(){
     let siglasQueja = this.crearTpForm.get('siglasQueja')?.value;
     this.service.contadorSiglas(siglasQueja).subscribe((data) => {
@@ -52,23 +67,36 @@ export class AgregarTipoComponent implements OnInit {
           confirmButtonText: 'OK'
         });
       }else{
-        this.agregarTipo();
+        this.alertar();
       }
     });
   }
+
+  alertar(){
+    Swal.fire({
+      title: 'Está seguro de guardar los cambios realizados?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, guardar cambios',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.agregarTipo();
+      }else{
+        this.dialogRef.close();
+      }
+    });
+  }
+
+
+  
 
   agregarTipo(){
     let fecha = new Date();
     let desdeStr = `${fecha.getDate()}-${('0' + (fecha.getMonth() + 1)).slice(-2)}-${fecha.getFullYear()}`;
 
-    if (this.crearTpForm.invalid) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Por favor complete los campos obligatorios.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-    }
+    
 
     const nuevoTipo: tipoQueja={
       siglasQueja: this.crearTpForm.get('siglasQueja')?.value,
@@ -80,12 +108,18 @@ export class AgregarTipoComponent implements OnInit {
       idEstado: 1,
     }
     this.service.guardarTipoQueja(nuevoTipo).toPromise().then(TIPO=>{
+     /*  this.router.navigate(['/dashboard/tipo-queja']); */
+      
+
+
       Swal.fire({
-        titleText: `Se ha almacenado la información con éxito.`,
+        titleText: `el tipo de queja ${nuevoTipo.siglasQueja} - ${nuevoTipo.descripcionQueja} fue guardado correctamente`,
         icon: 'success',
         showCloseButton: true,
         showConfirmButton: false
-      }); return;
+      },); return;
+
+
       
      } );
 

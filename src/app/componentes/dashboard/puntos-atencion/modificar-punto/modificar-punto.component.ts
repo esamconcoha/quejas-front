@@ -1,7 +1,7 @@
 import { modificarPunto } from './../../../Models/PuntosAtencion';
 import { PuntosAtencionService } from 'src/app/service/PuntosAtencion.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TokenService } from 'src/app/service/token.service';
 import { PuntosAtencion } from 'src/app/componentes/Models/PuntosAtencion';
@@ -16,19 +16,20 @@ export class ModificarPuntoComponent implements OnInit {
 
   idPuntoAtencion: number;
   contadorUsuarios: any;
-  
+  registro: any;
 
   constructor(private service: PuntosAtencionService,
     private dialogRef: MatDialogRef<ModificarPuntoComponent>,
     private tokenService: TokenService,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.idPuntoAtencion = data.idPuntoAtencion;
-    console.log('El id del punto es: ', this.idPuntoAtencion);
+       this.registro=data.registro; 
+       console.log(this.registro);
     }
 
   formularioparaModificar = new FormGroup({
-    nombrePuntoAtencion: new FormControl(),
-    estado: new FormControl(),
+    nombrePuntoAtencion: new FormControl('', Validators.required),
+    estado: new FormControl('', Validators.required),
    
   })
 
@@ -47,6 +48,22 @@ export class ModificarPuntoComponent implements OnInit {
     
   }
 
+
+
+  validarFormulario(){
+    if(this.formularioparaModificar.valid){
+      this.validarEstado();
+    }else{
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor complete los campos obligatorios.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  }
+
+  
 
   validarEstado() {
     const valorEstado= this.formularioparaModificar.get('estado')?.value ? 1 : 2;
@@ -80,21 +97,15 @@ export class ModificarPuntoComponent implements OnInit {
     }
   } 
 
+
+
+
  
   modificarPunto(){
     
 
     let fecha = new Date();
     let desdeStr = `${fecha.getDate()}-${('0' + (fecha.getMonth() + 1)).slice(-2)}-${fecha.getFullYear()}`;
-
-    if (this.formularioparaModificar.invalid) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Por favor complete los campos obligatorios.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-    }
 
 
 
@@ -115,7 +126,8 @@ export class ModificarPuntoComponent implements OnInit {
         icon: 'success',
         showCloseButton: true,
         showConfirmButton: false
-    })
+    });
+    
   })
   }
 
@@ -124,6 +136,7 @@ export class ModificarPuntoComponent implements OnInit {
   
 
   onCancelar(): void {
+
     this.dialogRef.close();
   }
 

@@ -26,7 +26,7 @@
       <mat-option>selecciona una opcion...</mat-option>
    
 
-      <mat-option (onSelectionChange)="traerTablaPuntos(regiones.idRegion)" *ngFor="let regiones of traerRegiones" 
+      <mat-option (click)="traerTablaPuntos(regiones.idRegion)" *ngFor="let regiones of traerRegiones" 
       [value]="regiones.idRegion">{{regiones.nombreRegion}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -52,13 +52,13 @@
       </tr>
     </thead>
    <tbody>
-      <tr *ngFor="let listarPuntos of listarPuntos ">
+      <tr *ngFor="let listarPuntos of listarPuntos; let i=index">
         <td>{{listarPuntos.nombrePunto}}</td>
         <td>{{listarPuntos.nombreRegion}}</td>
         <td>{{listarPuntos.nombreEstado}}</td>
         
         <td>
-          <button type="button" class="btn btn-primary" (click)="openDialogEditar(listarPuntos.idPuntoAtencion)">modificar</button>
+          <button type="button" class="btn btn-primary" (click)="openDialogEditar(listarPuntos.idPuntoAtencion,i)">modificar</button>
           
         </td>
       </tr>

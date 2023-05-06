@@ -5,6 +5,7 @@ import { PuntosAtencion, traerRegiones } from 'src/app/componentes/Models/Puntos
 import { PuntosAtencionService } from 'src/app/service/PuntosAtencion.service';
 import Swal from 'sweetalert2';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { PuntosAtencionComponent } from '../puntos-atencion.component';
 @Component({
   selector: 'app-agregar-punto',
   templateUrl: './agregar-punto.component.html',
@@ -21,7 +22,9 @@ export class AgregarPuntoComponent implements OnInit {
     private service: PuntosAtencionService,
   private formBuilder:FormBuilder,
   private dialogRef: MatDialogRef<AgregarPuntoComponent>,
-  private tokenService: TokenService
+  private tokenService: TokenService,
+  /* private puntoPrincipalComponent: PuntosAtencionComponent */
+
   ) { 
     this.crearPuntosForm= this.formBuilder.group({
       idRegion:[null, Validators.required],
@@ -84,14 +87,9 @@ export class AgregarPuntoComponent implements OnInit {
           icon: 'success',
           showCloseButton: true,
           showConfirmButton: false
-        }); return;
-
-      }/* ,error => Swal.fire({
-        titleText: `Error al registrar datos, por favor intente en otro momento.`,
-        icon: 'error',
-        showCloseButton: true,
-        showConfirmButton: false
-      }) */
+        }); 
+        /* this.puntoPrincipalComponent.setListaPuntos(this.crearPuntosForm.get('idRegion')?.value) */
+      }
       );
      
     

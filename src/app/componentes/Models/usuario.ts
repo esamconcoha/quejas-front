@@ -25,11 +25,14 @@ export interface usuarioSesion {
 export interface tablaUsuario{
     idUsuario:number;
     nombreUsuario:string;
+    apellidosUsuario:string;
     region: string;
     puntoAtencion:string;
     cargo: string;
     correo:string;
     estado:string;
+    idCargo:number;
+    idPuntoAtencion:number;
 
 }
 
@@ -43,3 +46,7 @@ export interface traerCargo{
     nombreCargo:string;
 }
 
+export interface contUsuarios{
+    contador:number;
+    nombrePunto:String;
+}

@@ -30,3 +30,9 @@ export interface tableQueja {
 export interface Correlativo{
     correlativo: string;
 }
+
+export interface tablaAsignacionQueja{
+    idQueja:number;
+    correlativo:string;
+    fechaCreacion:Date;
+}

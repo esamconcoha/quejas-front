@@ -28,12 +28,12 @@
           </tr>
         </thead>
        <tbody>
-          <tr *ngFor="let listarTipoQuejas of obtenerElementosPorPagina() ">
+          <tr *ngFor="let listarTipoQuejas of obtenerElementosPorPagina();let i =index">
             <td>{{listarTipoQuejas.siglasQueja}}</td>  
             <td>{{listarTipoQuejas.descripcionQueja}}</td>
             <td>  {{listarTipoQuejas.estado}}</td>
             <td>
-              <button type="button" class="btn btn-primary" (click)="openDialogEditar(listarTipoQuejas.idTipoQueja)">Modificar</button>
+              <button type="button" class="btn btn-primary" (click)="openDialogEditar(listarTipoQuejas.idTipoQueja, i)">Modificar</button>
             </td>
 
 

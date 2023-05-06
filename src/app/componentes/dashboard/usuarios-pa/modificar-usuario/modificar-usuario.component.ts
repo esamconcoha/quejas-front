@@ -17,6 +17,8 @@ export class ModificarUsuarioComponent implements OnInit {
   idUsuario:number;
   traerPuntos: traerPunto[]=[];
 traerCargo: traerCargo[]=[];
+registro:any;
+
 formularioModificarUsuario: FormGroup;
 
   constructor(
@@ -27,16 +29,16 @@ formularioModificarUsuario: FormGroup;
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.idUsuario=data.idUsuario;
-
-    this.formularioModificarUsuario =this.formBuilder.group({
-      Nombre: [],
-      apellidos: [],
-      idPuntoatencion:[],
-      id_cargo:[],
-      dpi:[],
-      correo:['',[Validators.required, Validators.email]],
-      estado: []
-    })
+    this.registro=data.registro;
+    console.log(this.registro);
+    this.formularioModificarUsuario = this.formBuilder.group({
+      Nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      apellidos: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      idPuntoatencion: ['', Validators.required],
+      id_cargo: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+      estado: ['', Validators.required]
+    });
    }
 
   ngOnInit() {
@@ -51,10 +53,7 @@ formularioModificarUsuario: FormGroup;
     this.dialogRef.close();
   }
 
-
-  get correoElectronicoField(){
-    return this.formularioModificarUsuario.get('correo');
-  } 
+  
 
 
   traerPuntosAtencion(){
@@ -71,18 +70,7 @@ formularioModificarUsuario: FormGroup;
     });
   }
 
-validarCorreo(){
-  if(this.formularioModificarUsuario.get('correo')?.invalid){
-    Swal.fire({
-      title: 'Error',
-      text: 'Por favor ingrese un correo valido.',
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
-  }else{
-    this.modificarUsuario();
-  }
-}
+
 
   modificarUsuario(){
     let fecha = new Date();
@@ -90,31 +78,41 @@ validarCorreo(){
 
   
 
-    if (this.formularioModificarUsuario.invalid) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Por favor complete los campos obligatorios.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-    }
+  
+
+   
 
       let rol:number=0;
 
 const id_cargo= this.formularioModificarUsuario.get("id_cargo")?.value;
-if(id_cargo===6){
-  rol=3;
-}else if(id_cargo===2 || id_cargo===3 || id_cargo===4){
-  rol=2;
-}else if(id_cargo===1){
-  rol=1;
-}else if(id_cargo===7){
-  rol=4;
-}else if(id_cargo===5){
-  rol=2;
-}else{
-  rol=0;
+
+switch(id_cargo){
+  case 1:
+    rol=1;
+    break;
+  case 2:
+    rol=2;
+    break;
+  case 3:
+    rol=2;
+    break;
+  case 4:
+    rol=2;
+    break;
+  case 5:
+    rol=2;
+    break;
+  case 6:
+    rol=3;
+    break;
+  case 7:
+    rol=4;
+    break;
+
+
 }
+
+
 
       const modificarUsuarios: Usuario={
         nombre: this.formularioModificarUsuario.get("Nombre")?.value,
@@ -124,7 +122,6 @@ if(id_cargo===6){
         idpuntoatencion: this.formularioModificarUsuario.get("idPuntoatencion")?.value,
         estado: this.formularioModificarUsuario.get('estado')?.value ? 1 : 2,
         correo: this.formularioModificarUsuario.get('correo')?.value,
-        dpi: this.formularioModificarUsuario.get('dpi')?.value,
         fechamodificacion: desdeStr,
         usuariomodifico: this.tokenService.getUserName(),
       }
@@ -154,6 +151,32 @@ if(id_cargo===6){
 
   }
 
+  get correoElectronicoField(){
+    return this.formularioModificarUsuario.get('correo');
+  } 
+
+  get NombreField(){
+    return this.formularioModificarUsuario.get('Nombre');
+  }
+
+  get apellidosField(){
+    return this.formularioModificarUsuario.get('apellidos');
+  }
+
+  validarFormulario(){
+    if(this.formularioModificarUsuario.valid){
+      this.modificarUsuario();
+    }else{
+  
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor ingrese los datos correctamente.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      
+    }
+  }
 
   
 }

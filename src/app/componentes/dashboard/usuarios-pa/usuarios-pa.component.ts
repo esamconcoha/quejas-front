@@ -19,7 +19,7 @@ interface SideNavToggle{
 export class UsuariosPaComponent implements OnInit {
   isSideNavCollapsed=false;
   screenWidth: number = 0;
-  public elementosPorPagina = 5;
+  public elementosPorPagina = 10;
   public paginaActual = 1;
   listaUsuarios: tablaUsuario[] = [];
 
@@ -79,25 +79,44 @@ export class UsuariosPaComponent implements OnInit {
   traerLista(){
     this.service.tablaUsuario().subscribe(dato=>{
       this.listaUsuarios= dato;
-      
+      console.log(this.listaUsuarios)
     })
       }
+
 
       openDialog() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.maxWidth = '2000px'; // establece el ancho máximo de la ventana a 800px
         dialogConfig.width = '1000px'; // establece el ancho de la ventana a 600px
-        this.dialog.open(AgregarUsuarioComponent, dialogConfig);
+      
+        const dialogRef =  this.dialog.open(AgregarUsuarioComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(result=>{
+          setTimeout(()=>{
+            console.log("intenta refrescar");
+            this.traerLista();
+          }, 4000);
+          
+        })
       }
       
 
-      openDialogEditar(idUsuario: number){
+      openDialogEditar(idUsuario: number, index: number){
         const dialogConfig = new MatDialogConfig();
        
         dialogConfig.maxWidth = '1500px'; // establece el ancho máximo de la ventana a 800px
         dialogConfig.width = '1000px';// establece el ancho de la ventana a 600px
-        dialogConfig.data = { idUsuario:idUsuario}; 
-        this.dialog.open(ModificarUsuarioComponent, dialogConfig);
+       const registro= this.listaUsuarios[index];
+       dialogConfig.data = { idUsuario:idUsuario, registro:registro}; 
+        const dialogRef= this.dialog.open(ModificarUsuarioComponent, dialogConfig);
+         dialogRef.afterClosed().subscribe(result=>{
+          setTimeout(()=>{
+  
+            this.traerLista();
+
+          }, 300);
+        }) 
+
       }
 
 }

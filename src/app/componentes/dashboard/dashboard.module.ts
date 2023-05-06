@@ -77,7 +77,6 @@ import { ModificarUsuarioComponent } from './usuarios-pa/modificar-usuario/modif
     MatPaginatorModule,
     MatDialogModule,
    
-
   ]
 })
 export class DashboardModule { }

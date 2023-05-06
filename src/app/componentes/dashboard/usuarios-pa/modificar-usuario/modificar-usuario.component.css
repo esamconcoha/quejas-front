@@ -28,3 +28,9 @@ margin-top: 10px;
     justify-content: center;
     gap: 80px;
   }
+
+  .campo{
+    margin-top: 22px;
+    width: 300px;
+    margin-bottom: 50px;
+  }

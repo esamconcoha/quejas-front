@@ -1,8 +1,10 @@
-import { tablaUsuario, traerCargo, traerPunto } from './../componentes/Models/usuario';
+import { contadorUsuarios } from './../componentes/Models/PuntosAtencion';
+import { contUsuarios, tablaUsuario, traerCargo, traerPunto } from './../componentes/Models/usuario';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Usuario } from '../componentes/Models/usuario';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +30,42 @@ tablaUsuario(): Observable<tablaUsuario[]>{
 puntos():Observable<traerPunto[]>{
   return this.httpClient.get<traerPunto[]>(`${this.baseURL}/traerPuntos`);
 }
+  
 
+private cacheCargos!:traerCargo[];
 cargo():Observable<traerCargo[]>{
-  return this.httpClient.get<traerCargo[]>(`${this.baseURL}/traerCargo`);
+  if(this.cacheCargos){
+    console.log("se obtuvo cache de cargos");
+    return of(this.cacheCargos);
+  }
+  const cacheTraerCargo = localStorage.getItem('cacheCargos');
+  if(cacheTraerCargo){
+    this.cacheCargos = JSON.parse(cacheTraerCargo);
+    console.log("se obtuvo de cache");
+    return of(this.cacheCargos);
+  }
+
+  return this.httpClient.get<traerCargo[]>(`${this.baseURL}/traerCargo`).pipe(
+    tap(data =>{
+      console.log(data);
+      this.cacheCargos = data;
+      localStorage.setItem('cacheCargos', JSON.stringify(this.cacheCargos));
+
+    })
+  );
 }
+
+
+
 
 modificarUsuario(idUsuario: number, usuarioModificado:Usuario):Observable<Usuario>{
   return this.httpClient.put<Usuario>(`${this.baseURL}/modificarUsuario/${idUsuario}`, usuarioModificado);
 }
 
+
+contExistenciaUsuario(dpi:String):Observable<contUsuarios>{
+  return this.httpClient.get<contUsuarios>(`${this.baseURL}/contUsuario/${dpi}`);
+}
 
 
 }

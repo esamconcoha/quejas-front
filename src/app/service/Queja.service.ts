@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MedioIngresoQueja } from '../componentes/Models/MedioIngresoQueja';
 import { PuntosAtencionList } from '../componentes/Models/PuntosAtencion';
-import { Queja, Correlativo, tableQueja } from '../componentes/Models/Queja';
+import { Queja, Correlativo, tableQueja, tablaAsignacionQueja } from '../componentes/Models/Queja';
 import { TipoQuejaList } from '../componentes/Models/TIpoQueja';
 import { tap } from 'rxjs/operators';
 @Injectable({
@@ -42,6 +42,7 @@ listarCatalogoMedioIngreso(): Observable<MedioIngresoQueja[]> {
     return of(this.cacheMedioIngreso);
     
   }
+
   const cachedDataRazon = localStorage.getItem('cacheMedioIngreso');
   if (cachedDataRazon) {
     this.cacheMedioIngreso = JSON.parse(cachedDataRazon);
@@ -49,6 +50,10 @@ listarCatalogoMedioIngreso(): Observable<MedioIngresoQueja[]> {
     return of(this.cacheMedioIngreso);
   
   }
+
+  
+
+
   return this.httpClient.get<MedioIngresoQueja[]>(`${this.baseURL}/medio-ingreso`).pipe(
     tap(data => {
       console.log(data);
@@ -73,6 +78,11 @@ listarCatalogoTipoQueja(): Observable<TipoQuejaList[]> {
   return this.httpClient.get<TipoQuejaList[]>(`${this.baseURL}/tipo-queja`);
 }
   
+
+tablaAsignacionQueja(): Observable<tablaAsignacionQueja[]>{
+  return this.httpClient.get<tablaAsignacionQueja[]>(`${this.baseURL}/tablaAsignacionQueja`);
+}
+
   
 }
 

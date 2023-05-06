@@ -4,7 +4,7 @@ import { PuntosAtencion, traerPuntosAtencion, traerRegiones } from './../../Mode
 import { PuntosAtencionService } from './../../../service/PuntosAtencion.service';
 import { Component, Input, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import { ModificarPuntoComponent } from './modificar-punto/modificar-punto.component';
 interface SideNavToggle {
   screenWidth: number;
@@ -28,7 +28,8 @@ export class PuntosAtencionComponent implements OnInit {
   constructor(
     private service: PuntosAtencionService,
     private formBuilder:FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+   
   ) { 
     this.regionesForm= this.formBuilder.group({
       idRegion:[null, Validators.required],
@@ -73,38 +74,75 @@ obtenerRegiones(){
 
 
 
+
+
+idRegionSelected:number=0;
+
+traerTablaPuntos(idRegion:number){
+
+  
+  this.idRegionSelected=idRegion;
+ 
+ this.service.traerPuntos(this.idRegionSelected).subscribe(puntos=> {
+  this.listarPuntos =puntos;
+  console.log(this.listarPuntos,"estos son los puntos de atención :")
+ });
+
+}
+
+
+
 openDialog() {
   const dialogConfig = new MatDialogConfig();
   /* const dialogRef = this.dialog.open(AgregarPuntoComponent); */
   dialogConfig.maxWidth = '800px'; // establece el ancho máximo de la ventana a 800px
   dialogConfig.width = '600px'; // establece el ancho de la ventana a 600px
-  this.dialog.open(AgregarPuntoComponent, dialogConfig);
- /*  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  }); */
+  const dialogRef= this.dialog.open(AgregarPuntoComponent, dialogConfig);
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(this.idRegionSelected)
+    if(this.idRegionSelected != 0){
+      setTimeout(() => {
+        this.traerTablaPuntos(this.idRegionSelected!);
+        this.idRegionSelected=0;
+        console.log("intenta hacer metodo");
+      }, 2000); // espera 3 segundos (3000 milisegundos)
+    }
+  });
+  
 }
 
 
 
-traerTablaPuntos(idRegion:number){
- this.service.traerPuntos(idRegion).subscribe(puntos=> {
-  this.listarPuntos =puntos;
-  console.log(this.listarPuntos,"estos son los puntos de atención :")
- })
-}
 
-get idRegionField(){
-  return this.regionesForm.get('idRegion');
-}
-
-
-openDialogEditar(idPuntoAtencion: number){
+openDialogEditar(idPuntoAtencion: number,index: number){
   const dialogConfig = new MatDialogConfig();
  
   dialogConfig.maxWidth = '800px'; // establece el ancho máximo de la ventana a 800px
   dialogConfig.width = '600px';// establece el ancho de la ventana a 600px
-  dialogConfig.data = { idPuntoAtencion: idPuntoAtencion}; 
-  this.dialog.open(ModificarPuntoComponent, dialogConfig);
+  
+  const registro = this.listarPuntos[index];
+  dialogConfig.data = { idPuntoAtencion: idPuntoAtencion,registro:registro}; 
+
+  const dialogRef= this.dialog.open(ModificarPuntoComponent, dialogConfig);
+  
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(this.idRegionSelected)
+
+    if(this.idRegionSelected != 0){
+      this.listarPuntos=[];
+      setTimeout(() => {
+        
+        this.traerTablaPuntos(this.idRegionSelected!);
+        
+  
+      }, 500); 
+    }
+  });
 }
+
+
+
+
 
 }

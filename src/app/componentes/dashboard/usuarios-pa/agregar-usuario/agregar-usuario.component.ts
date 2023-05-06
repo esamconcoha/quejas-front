@@ -7,6 +7,9 @@ import { traerRegiones } from 'src/app/componentes/Models/PuntosAtencion';
 import { PuntosAtencionService } from 'src/app/service/PuntosAtencion.service';
 import { traerPunto } from 'src/app/componentes/Models/usuario';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { DashboardComponent } from '../../dashboard.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-agregar-usuario',
@@ -19,19 +22,22 @@ export class AgregarUsuarioComponent implements OnInit {
   crearUserForm: FormGroup;
 traerPuntos: traerPunto[]=[];
 traerCargo: traerCargo[]=[];
+contadorUsuarios:any;
 
 
   constructor(
     private service: UsuarioService,
     private formBuilder:FormBuilder,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router,
+    private dialogRef: MatDialogRef<AgregarUsuarioComponent>
   ) { 
 
     this.crearUserForm= this.formBuilder.group({
      
       dpi: [],
-      Nombre: [],
-      apellidos: [],
+      Nombre: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      apellidos: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
       correo: ['',[Validators.required, Validators.email]],
       password: [],
       numeroTelefono: [],
@@ -46,6 +52,9 @@ traerCargo: traerCargo[]=[];
     this.traerPuntosAtencion();
     this.traerCargos();
   }
+  get correoElectronicoField(){
+    return this.crearUserForm.get('correo');
+  } 
 
 traerPuntosAtencion(){
   this.service.puntos().subscribe((puntos) => {
@@ -61,32 +70,74 @@ traerCargos(){
   });
 }
 
-guardarUsuario(user?: Usuario) {
-  this.service.registrarUsuario(user!).toPromise().then(dato => {
-    Swal.fire('Se guardaron correctamente los datos del usuario para el punto de atención')
-    console.log(dato);
-    
-  },error => Swal.fire('ERROR', `Hubo problemas al crear el Usuario, Porfavor intenta de nuevo`, `error`))
+
+
+
+validarFormulario(){
+  if(this.crearUserForm.valid){
+    this.validarExistencia();
+  }else{
+    Swal.fire({
+      title: 'Error',
+      text: 'Por favor ingrese los datos correctamente.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
+
 }
+
+validarExistencia(){
+  const dpi= this.crearUserForm.get("dpi")?.value;
+  this.service.contExistenciaUsuario(dpi).subscribe((data)=>{
+    this.contadorUsuarios=data;
+    if(this.contadorUsuarios?.count >= 1){
+      Swal.fire({
+        title: 'Error',
+        text: 'Error al guardar los datos, el usuario ya existe en el punto de atención '+this.contadorUsuarios.nombrePunto ,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }else{
+      this.CrearUsuario();
+    }
+  });
+}
+
+
 
 CrearUsuario(): void {
   let fecha = new Date();69
   let desdeStr = `${fecha.getDate()}-${('0' + (fecha.getMonth() + 1)).slice(-2)}-${fecha.getFullYear()}`;
 
+  
+
 let rol:number=0;
 const id_cargo= this.crearUserForm.get("id_cargo")?.value;
-if(id_cargo===6){
-  rol=3;
-}else if(id_cargo===2 || id_cargo===3 || id_cargo===4){
-  rol=2;
-}else if(id_cargo===1){
-  rol=1;
-}else if(id_cargo===7){
-  rol=4;
-}else if(id_cargo===5){
-  rol=2;
-}else{
-  rol=0;
+switch(id_cargo){
+  case 1:
+    rol=1;
+    break;
+  case 2:
+    rol=2;
+    break;
+  case 3:
+    rol=2;
+    break;
+  case 4:
+    rol=2;
+    break;
+  case 5:
+    rol=2;
+    break;
+  case 6:
+    rol=3;
+    break;
+  case 7:
+    rol=4;
+    break;
+
+
 }
 
 
@@ -125,9 +176,24 @@ if(id_cargo===6){
   })
 }
 
-get correoElectronicoField(){
-  return this.crearUserForm.get('correo');
-} 
+
+
+guardarUsuario(user?: Usuario) {
+  this.service.registrarUsuario(user!).toPromise().then(dato => {
+    Swal.fire({title: '',
+    text: 'Se guardaron correctamente los datos del usuario para el punto de atención',
+    icon: 'success',
+    confirmButtonText: 'OK'})
+    console.log(dato);
+    
+    
+  },error => Swal.fire('ERROR', `Hubo problemas al crear el Usuario, Porfavor intenta de nuevo`, `error`))
+}
+
+
+onCancelar(): void {
+  this.dialogRef.close();
+}
 
 }
 

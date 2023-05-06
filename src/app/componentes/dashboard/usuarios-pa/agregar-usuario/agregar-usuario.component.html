@@ -6,7 +6,7 @@
         <label for="text" class="-form-label">Nombre del usuario</label>
         <div class="col-sm-10">
         <input type="text" maxlength="25" class="form-control input" id="validationTextarea" formControlName="Nombre"
-        required placeholder="[a-zA-Z]{1,50}"
+        required pattern="[a-zA-Z]{1,50}"
             placeholder="nombre del usuario" required="true">
         </div>
     </div>
@@ -61,7 +61,7 @@
                 <div class="col">
             <mat-form-field appearance="standard" style="width:300px">
                 <label for="dpi">Documento de identificacion </label>
-                <input formControlName="dpi" matInput type="number" maxlength="15" required pattern="[0-9]{1,15}"
+                <input formControlName="dpi" matInput type="number" maxlength="13" required pattern="[0-9]{1,15}"
                   placeholder="Digite su Documento de identificacion" oninput="javascript: if (this.value.length > this.maxLength) 
                   this.value = this.value.slice(0, this.maxLength);">
               </mat-form-field>
@@ -70,7 +70,7 @@
               <div class="col">
               <mat-form-field appearance="standard" style="width:300px">
                 <label for="correo">Correo </label>
-                <input matInput type="email" formControlName="correo" requird placeholder="Digite su correo electronico">
+                <input matInput type="email" formControlName="correo" required="true">
                 <mat-error *ngIf="correoElectronicoField?.hasError('required')">Digite un correo electronico valido</mat-error>
               </mat-form-field>
             </div>
@@ -89,14 +89,14 @@
             <div class="col">
               <mat-form-field appearance="standard" class="campo1">
                 <label for="numeroTelefono">Numero de telefono </label>
-                <input matInput type="number" required placeholder="[0,9]{1,8}" formControlName="numeroTelefono" required
-                  placeholder="99999999">
+                <input matInput type="number"  formControlName="numeroTelefono" maxlength="8" oninput="javascript: if (this.value.length > this.maxLength) 
+                this.value = this.value.slice(0, this.maxLength);">
               </mat-form-field>
             </div>
 
             <div mat-dialog-actions class="d-flex justify-content-center gap-5">
-                <button type="button" class="btn btn-primary" >Cancelar</button>
-                <button type="button" class="btn btn-primary" mat-dialog-close (click)="CrearUsuario()">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="onCancelar()">Cancelar</button>
+                <button type="button" class="btn btn-primary" mat-dialog-close (click)="validarFormulario()">Guardar</button>
             </div>
             </div>
 

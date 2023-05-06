@@ -2,10 +2,11 @@ import { modificarPunto } from './../../../Models/PuntosAtencion';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { TIpoQueja, tipoQueja } from 'src/app/componentes/Models/TIpoQueja';
+import { TIpoQueja, TipoQuejaList, tipoQueja } from 'src/app/componentes/Models/TIpoQueja';
 import { TipoQuejaService } from 'src/app/service/tipoQueja.service';
 import { TokenService } from 'src/app/service/token.service';
 import Swal from 'sweetalert2';
+import { TipoQuejasComponent } from '../tipo-quejas.component';
 
 @Component({
   selector: 'app-modificar-tipo',
@@ -16,14 +17,19 @@ export class ModificarTipoComponent implements OnInit {
 
   idTipoQueja: number;
   contadorSiglas:any;
+  registro:any; 
+  listaTipoQuejas: TipoQuejaList[] = [];
+  
   constructor(
     private service: TipoQuejaService,
     private dialogRef: MatDialogRef<ModificarTipoComponent>,
     private tokenService: TokenService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    
   ) {
     this.idTipoQueja= data.idTipoQueja;
-    console.log('El id del tipo queja es: ', this.idTipoQueja);
+    this.registro = data.registro;
+   console.log(this.registro);
    }
 
 
@@ -35,18 +41,42 @@ export class ModificarTipoComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.traerLista();
+
   }
 
   onCancelar(): void {
     this.dialogRef.close();
   }
   
+  traerLista(){
+    this.service.traerTipoQueja().subscribe(dato=>{
+      this.listaTipoQuejas = dato;
+    })
+      }
+
+validarFormulario(){
+  
+  if (this.formularioModificarTipo.invalid) {
+    Swal.fire({
+      title: 'Error',
+      text: 'Por favor complete los campos obligatorios.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }else{
+    this.validarExistencia();
+  }
+}
 
   validarExistencia(){
     let siglasQueja = this.formularioModificarTipo.get('siglasQueja')?.value;
-    this.service.contadorSiglas(siglasQueja).subscribe((data) => {
-      this.contadorSiglas=data;
-      if(this.contadorSiglas.count > 1){
+    const existente = this.listaTipoQuejas.filter(tipoQueja =>
+      tipoQueja.idTipoQueja !== this.registro.idTipoQueja &&
+      tipoQueja.siglasQueja === siglasQueja
+    )[0];
+  
+      if(existente){
         Swal.fire({
           title: 'Error',
           text: 'Ya existe un tipo de queja con estas siglas.',
@@ -54,9 +84,9 @@ export class ModificarTipoComponent implements OnInit {
           confirmButtonText: 'OK'
         });
       }else{
-        this.alertar();
+        this.alertar(); 
       }
-    });
+   
   }
 
   alertar(){
@@ -86,14 +116,6 @@ export class ModificarTipoComponent implements OnInit {
 
   
     
-    if (this.formularioModificarTipo.invalid) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Por favor complete los campos obligatorios.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-    }
 
 
     const modificarPuntos: tipoQueja={
@@ -110,7 +132,8 @@ export class ModificarTipoComponent implements OnInit {
         icon: 'success',
         showCloseButton: true,
         showConfirmButton: false
-    })
+    });
+    
   })
 
 

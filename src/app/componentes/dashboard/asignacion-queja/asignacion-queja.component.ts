@@ -1,4 +1,6 @@
+import { tablaAsignacionQueja } from './../../Models/Queja';
 import { Component, OnInit } from '@angular/core';
+import { QuejaService } from 'src/app/service/Queja.service';
 interface SideNavToggle{
   screenWidth: number;
   collapsed:boolean;
@@ -12,9 +14,15 @@ interface SideNavToggle{
 export class AsignacionQuejaComponent implements OnInit {
   isSideNavCollapsed=false;
   screenWidth: number = 0;
-  constructor() { }
+  Queja: tablaAsignacionQueja[]=[];
+
+
+  constructor(
+    private service: QuejaService
+  ) { }
 
   ngOnInit() {
+    this.traerQuejas();
   }
   onToggleSideNav(data: SideNavToggle):void{
     this.screenWidth = data.screenWidth;
@@ -30,5 +38,14 @@ export class AsignacionQuejaComponent implements OnInit {
     }
     return styleclass;
   }
+
+
+
+  traerQuejas(){
+  this.service.tablaAsignacionQueja().subscribe(quejas=>{
+    this.Queja=quejas;
+  })
+  }
+
 
 }
