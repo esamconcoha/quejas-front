@@ -50,7 +50,7 @@ formularioModificarUsuario: FormGroup;
 
 
   onCancelar(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(window.location.href='dashboard/usuarios-pa');
   }
 
   
@@ -134,14 +134,19 @@ switch(id_cargo){
             text: '',
             icon: 'success',
             confirmButtonText: 'OK'
+          }).then(()=>{
+            this.dialogRef.close(window.location.href='dashboard/usuarios-pa');
           });
+
         }else{
           Swal.fire({
             title: 'Datos actualizados',
             text: '',
             icon: 'success',
             confirmButtonText: 'OK'
-          });
+          }).then(()=>{
+            this.dialogRef.close(window.location.href='dashboard/usuarios-pa');
+          })
         }
 
 

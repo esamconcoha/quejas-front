@@ -87,8 +87,8 @@ export class AgregarPuntoComponent implements OnInit {
           icon: 'success',
           showCloseButton: true,
           showConfirmButton: false
-        }); 
-        /* this.puntoPrincipalComponent.setListaPuntos(this.crearPuntosForm.get('idRegion')?.value) */
+        });
+        
       }
       );
      

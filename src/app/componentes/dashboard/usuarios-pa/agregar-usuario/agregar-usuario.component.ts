@@ -159,6 +159,7 @@ switch(id_cargo){
     idpuntoatencion: this.crearUserForm.get("idPuntoatencion")?.value,
     telefono: this.crearUserForm.get("numeroTelefono")?.value
   }
+
   Swal.fire({
     title: '¿Estas seguro?',
     icon: 'warning',
@@ -168,9 +169,23 @@ switch(id_cargo){
     cancelButtonText: 'No, cancelar',
     
   }).then((result) => {
+    
    console.log(user);
    if (result.isConfirmed) {
-    this.guardarUsuario(user);
+    this.guardarUsuario(user).then(()=>{
+
+      Swal.fire({title: '',
+      text: 'Se guardaron correctamente los datos del usuario para el punto de atención',
+      icon: 'success',
+      confirmButtonText: 'OK'}).then(()=>{
+        window.location.href='dashboard/usuarios-pa';
+      })
+
+
+    })
+
+}else{
+  this.dialogRef.close(window.location.href='dashboard/usuarios-pa')
 }
 
   })
@@ -179,20 +194,14 @@ switch(id_cargo){
 
 
 guardarUsuario(user?: Usuario) {
-  this.service.registrarUsuario(user!).toPromise().then(dato => {
-    Swal.fire({title: '',
-    text: 'Se guardaron correctamente los datos del usuario para el punto de atención',
-    icon: 'success',
-    confirmButtonText: 'OK'})
-    console.log(dato);
-    
-    
-  },error => Swal.fire('ERROR', `Hubo problemas al crear el Usuario, Porfavor intenta de nuevo`, `error`))
+  return this.service.registrarUsuario(user!).toPromise();
+
 }
 
 
+
 onCancelar(): void {
-  this.dialogRef.close();
+  this.dialogRef.close(window.location.href='dashboard/usuarios-pa');
 }
 
 }

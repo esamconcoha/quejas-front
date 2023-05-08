@@ -89,15 +89,9 @@ export class UsuariosPaComponent implements OnInit {
         dialogConfig.maxWidth = '2000px'; // establece el ancho máximo de la ventana a 800px
         dialogConfig.width = '1000px'; // establece el ancho de la ventana a 600px
       
-        const dialogRef =  this.dialog.open(AgregarUsuarioComponent, dialogConfig);
+       this.dialog.open(AgregarUsuarioComponent, dialogConfig);
 
-        dialogRef.afterClosed().subscribe(result=>{
-          setTimeout(()=>{
-            console.log("intenta refrescar");
-            this.traerLista();
-          }, 4000);
-          
-        })
+      
       }
       
 
@@ -108,14 +102,8 @@ export class UsuariosPaComponent implements OnInit {
         dialogConfig.width = '1000px';// establece el ancho de la ventana a 600px
        const registro= this.listaUsuarios[index];
        dialogConfig.data = { idUsuario:idUsuario, registro:registro}; 
-        const dialogRef= this.dialog.open(ModificarUsuarioComponent, dialogConfig);
-         dialogRef.afterClosed().subscribe(result=>{
-          setTimeout(()=>{
-  
-            this.traerLista();
-
-          }, 300);
-        }) 
+      this.dialog.open(ModificarUsuarioComponent, dialogConfig);
+       
 
       }
 

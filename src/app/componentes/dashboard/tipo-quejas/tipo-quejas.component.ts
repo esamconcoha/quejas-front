@@ -81,13 +81,8 @@ this.service.traerTipoQueja().subscribe(dato=>{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '800px'; // establece el ancho máximo de la ventana a 800px
     dialogConfig.width = '600px'; // establece el ancho de la ventana a 600px
-   const dialogref= this.dialog.open(AgregarTipoComponent, dialogConfig);
-   dialogref.afterClosed().subscribe(result =>{
-      console.log("intenta refrescar");
-      setTimeout(()=>{
-        this.traerLista();
-      },3500);
-   })
+   this.dialog.open(AgregarTipoComponent, dialogConfig);
+  
   
   }
 
@@ -99,20 +94,9 @@ this.service.traerTipoQueja().subscribe(dato=>{
     
     const registro= this.listaTipoQuejas[index];// obtiene datos del registro seleccionado a traves de la variable que tiene el array
     dialogConfig.data = { idTipoQueja: idTipoQueja, registro: registro}; 
-    const dialgRef =this.dialog.open(ModificarTipoComponent, dialogConfig);
+    this.dialog.open(ModificarTipoComponent, dialogConfig);
 
   
-
-    dialgRef.afterClosed().subscribe(result =>{
-      
-      console.log("intenta refrescar");
-      setTimeout(()=>{
-        
-        this.traerLista();
-      },3500);
-
-
-    })
 
   }
 

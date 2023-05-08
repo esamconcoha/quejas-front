@@ -65,6 +65,7 @@ export class PuntosAtencionComponent implements OnInit {
 
 // logica del componente propiamente
 obtenerRegiones(){
+this.traerRegiones=[];
   this.service.traerRegiones().subscribe((nombreRegion) => {
     this.traerRegiones= nombreRegion;
     console.log(this.traerRegiones);
@@ -128,7 +129,8 @@ openDialogEditar(idPuntoAtencion: number,index: number){
   
   dialogRef.afterClosed().subscribe(result => {
     console.log(this.idRegionSelected)
-
+    console.log(result);
+    
     if(this.idRegionSelected != 0){
       this.listarPuntos=[];
       setTimeout(() => {

@@ -39,7 +39,7 @@ export class AgregarTipoComponent implements OnInit {
 
 
   onCancelar(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(window.location.href='dashboard/tipo-queja');
   }
 
   validarFormulario(){
@@ -67,12 +67,16 @@ export class AgregarTipoComponent implements OnInit {
           confirmButtonText: 'OK'
         });
       }else{
-        this.alertar();
+        const nuevoTipo: tipoQueja={
+          siglasQueja: siglasQueja,
+          descripcionQueja: this.crearTpForm.get('descripcionQueja')?.value
+        }
+        this.alertar(nuevoTipo);
       }
     });
   }
 
-  alertar(){
+  alertar(nuevoTipo: tipoQueja){
     Swal.fire({
       title: 'Está seguro de guardar los cambios realizados?',
       text: '',
@@ -82,9 +86,23 @@ export class AgregarTipoComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.agregarTipo();
+
+        this.agregarTipo().then(()=>{
+
+          Swal.fire({
+            titleText: `el tipo de queja ${nuevoTipo.siglasQueja} - ${nuevoTipo.descripcionQueja} fue guardado correctamente`,
+            icon: 'success',
+            showCloseButton: true,
+            showConfirmButton: false
+          }).then(()=>{
+            window.location.href='dashboard/tipo-queja';
+          })
+
+        })
+
+
       }else{
-        this.dialogRef.close();
+        this.dialogRef.close(window.location.href='dashboard/tipo-queja');
       }
     });
   }
@@ -107,21 +125,8 @@ export class AgregarTipoComponent implements OnInit {
       usuariomodifico: this.tokenService.getUserName(),
       idEstado: 1,
     }
-    this.service.guardarTipoQueja(nuevoTipo).toPromise().then(TIPO=>{
-     /*  this.router.navigate(['/dashboard/tipo-queja']); */
-      
 
-
-      Swal.fire({
-        titleText: `el tipo de queja ${nuevoTipo.siglasQueja} - ${nuevoTipo.descripcionQueja} fue guardado correctamente`,
-        icon: 'success',
-        showCloseButton: true,
-        showConfirmButton: false
-      },); return;
-
-
-      
-     } );
+    return this.service.guardarTipoQueja(nuevoTipo).toPromise();
 
 
   }

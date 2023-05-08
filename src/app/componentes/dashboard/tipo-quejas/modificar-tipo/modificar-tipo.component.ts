@@ -46,7 +46,8 @@ export class ModificarTipoComponent implements OnInit {
   }
 
   onCancelar(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(window.location.href='dashboard/tipo-queja');
+    
   }
   
   traerLista(){
@@ -99,9 +100,22 @@ validarFormulario(){
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.modificarTipo();
+        
+        this.modificarTipo().then(() => {
+          // La alerta de éxito de la operación se mostrará después de que la operación haya terminado
+          Swal.fire({
+            titleText: `Se ha Modificado el tipo de queja con éxito.`,
+            icon: 'success',
+            showCloseButton: true,
+            showConfirmButton: false,
+          }).then(() => {//se coloca then para que despues del swal se recargue la pagina, porque si se pone sin el then interrumpe la alerta
+            window.location.href='dashboard/tipo-queja';
+          });
+        })
+
       }else{
-        this.dialogRef.close();
+        this.dialogRef.close(window.location.href='dashboard/tipo-queja');
+        
       }
     });
   }
@@ -126,17 +140,20 @@ validarFormulario(){
       usuariomodifico: this.tokenService.getUserName(),
 
     }
-    this.service.modificarTipoQueja(this.idTipoQueja,modificarPuntos).toPromise().then(PUNTO=>{
+
+   return this.service.modificarTipoQueja(this.idTipoQueja,modificarPuntos).toPromise();//el return es para que retorne la promesa que espera el metodo alertar(); para que pueda mostrar el swal
+   /* .then(PUNTO=>{
       Swal.fire({
         titleText: `Se ha Modificado el tipo de queja con éxito.`,
         icon: 'success',
         showCloseButton: true,
-        showConfirmButton: false
-    });
-    
-  })
+        showConfirmButton: false,
+        
+    });z
+   
+  }) */
 
-
+  
   }
 
 }
