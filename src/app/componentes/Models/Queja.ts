@@ -25,6 +25,7 @@ export interface tableQueja {
     medioIngreso: string;
     fechaCreacion: string;
     detalle: string;
+    tiempoOperacion:string;
 
 }
 

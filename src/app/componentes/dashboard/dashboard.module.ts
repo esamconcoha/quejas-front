@@ -37,6 +37,8 @@ import { ModificarTipoComponent } from './tipo-quejas/modificar-tipo/modificar-t
 import { AgregarUsuarioComponent } from './usuarios-pa/agregar-usuario/agregar-usuario.component';
 import { ModificarUsuarioComponent } from './usuarios-pa/modificar-usuario/modificar-usuario.component';
 import { FichaComponent } from './asignacion-queja/ficha/ficha.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { TrazabilidadComponent } from './reporte-administrativo/trazabilidad/trazabilidad.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -56,13 +58,14 @@ import { FichaComponent } from './asignacion-queja/ficha/ficha.component';
    ModificarTipoComponent,
    AgregarUsuarioComponent,
    ModificarUsuarioComponent,
-   FichaComponent
+   FichaComponent,
+   TrazabilidadComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     MatFormFieldModule,
-    
+    MatCheckboxModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,

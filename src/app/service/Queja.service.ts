@@ -6,6 +6,7 @@ import { PuntosAtencionList } from '../componentes/Models/PuntosAtencion';
 import { Queja, Correlativo, tableQueja, tablaAsignacionQueja, fichaQueja } from '../componentes/Models/Queja';
 import { TipoQuejaList } from '../componentes/Models/TIpoQueja';
 import { tap } from 'rxjs/operators';
+import { trazabilidadTable } from '../componentes/Models/Trazabilidad';
 @Injectable({
   providedIn: 'root'
 })
@@ -87,5 +88,25 @@ fichaQueja(idQueja:number): Observable<fichaQueja>{
   return this.httpClient.get<fichaQueja>(`${this.baseURL}/fichaQueja/`+`${idQueja}`);
 }
   
+
+tablaQuejaporFechas(fechaInicio: string, fechaFinal: string): Observable<tableQueja[]>{
+  return this.httpClient.get<tableQueja[]>(`${this.baseURL}/quejasPorFechas`+`/${fechaInicio}`+`/${fechaFinal}`);
 }
 
+tableQuejasCorrelativo(correlativo:string): Observable<tableQueja[]>{
+  return this.httpClient.get<tableQueja[]>(`${this.baseURL}/quejaPorCorrelativo`+`/${correlativo}`);
+}
+
+getQuejasPorPuntosAtencion(idPuntosAtencion:number): Observable<tableQueja[]>{
+  return this.httpClient.get<tableQueja[]>(`${this.baseURL}/quejaPorPuntoAtencion`+`/${idPuntosAtencion}`);
+}
+
+getQUejasRegion(idRegion:number): Observable<tableQueja[]>{
+  return this.httpClient.get<tableQueja[]>(`${this.baseURL}/quejasPorRegion`+`/${idRegion}`);
+}
+
+getTrazabiliad(correlativo: string): Observable<trazabilidadTable[]>{
+  return this.httpClient.get<trazabilidadTable[]>(`${this.baseURL}/TrazabilidadCorrelativo`+`/${correlativo}`);
+  
+}
+}

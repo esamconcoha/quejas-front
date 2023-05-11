@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './componentes/helpers/auth.interceptor';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +55,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCheckboxModule
 
   ]
 

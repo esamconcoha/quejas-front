@@ -4,6 +4,13 @@ import { Queja, tableQueja } from '../../Models/Queja';
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import * as XLSX from 'xlsx';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PuntosAtencion } from '../../Models/PuntosAtencion';
+import { RegionService } from 'src/app/service/Region.service';
+import { Region } from '../../Models/Region';
+import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { TrazabilidadComponent } from './trazabilidad/trazabilidad.component';
 interface SideNavToggle{
   screenWidth: number;
   collapsed:boolean;
@@ -18,14 +25,43 @@ export class ReporteAdministrativoComponent implements OnInit {
   screenWidth: number = 0;
   public elementosPorPagina = 5;
   public paginaActual = 1;
-
+  regiones: Region[] = [];
+  listaPuntosAtencion: PuntosAtencion[] = [];
+  formularioReporteria: FormGroup= this.formBuilder.group({
+    FechaInicio: ['', [Validators.required]],
+    FechaFinal: ['', [Validators.required]],
+    correlativo: ['', [Validators.required]],
+    puntoAtencion: ['', [Validators.required]],
+    region: ['', [Validators.required]],
+  })
   listaQuejas: tableQueja[] = [];
   constructor(
-    private quejaServicio:QuejaService
+    private formBuilder:FormBuilder,
+    private quejaServicio:QuejaService,
+    private service:RegionService,
+    public dialog: MatDialog,
+  
     ) { }
 
   ngOnInit() {
-    this.traerQuejas();
+    this.listarPuntosAtencion();
+    this. obtenerRegiones();
+  }
+  public correlativo:string="";
+
+  listarPuntosAtencion(){
+    this.quejaServicio.listarCatalogoPuntosAtencion().subscribe(dato =>{
+      this.listaPuntosAtencion = dato;
+      console.log(dato);
+    }
+    )
+  }
+
+
+  obtenerRegiones(){
+    this.service.getRegionList().subscribe(dato => {
+      this.regiones = dato;
+    });
   }
   
   //Metodos para la paginacion
@@ -72,14 +108,23 @@ export class ReporteAdministrativoComponent implements OnInit {
   }
 
   //Metodo para traer las quejas
-  traerQuejas(){
+  /* traerQuejas(){
     this.quejaServicio.listarQuejaPorPuntoAtencion(1).subscribe(dato =>{
       this.listaQuejas = dato;
     })
-  }
+  } */
 //Metodo para descargar el pdf
   Imprimirpdf() {
     var doc = new jsPDF();
+    var headerText = "REPORTE DE QUEJAS POR MAL SERVICIO O SERVICIO NO CONFORME";
+    var textWidth = doc.getTextWidth(headerText);
+  
+    // Calcular la posición centrada
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var textX = (pageWidth - textWidth) / 2;
+  
+    // Agregar el encabezado centrado
+    doc.text(headerText, textX, 10);
     autoTable(doc,{html:"table"});
     doc.save("quejas.pdf")
    }
@@ -99,5 +144,69 @@ export class ReporteAdministrativoComponent implements OnInit {
   
    }
    
+   consultarFechas(fechaInicio?:string, fechaFinal?:string){
+    this.quejaServicio.tablaQuejaporFechas(fechaInicio!,fechaFinal!).subscribe(dato =>{
+      this.listaQuejas = dato;
+    })
+   }
 
+   consultarCorrelativo(correlativo?:string){
+    this.quejaServicio.tableQuejasCorrelativo(correlativo!).subscribe(dato =>{
+      this.listaQuejas = dato;
+    })
+   }
+
+   consultarPuntoAtencion(puntoAtencion?:number){
+    this.quejaServicio.getQuejasPorPuntosAtencion(puntoAtencion!).subscribe(dato =>{
+      this.listaQuejas = dato;
+    })
+   }
+
+   consultarRegion(region?:number){
+    this.quejaServicio.getQUejasRegion(region!).subscribe(dato =>{
+      this.listaQuejas = dato;
+    })
+  }
+
+
+
+  filtrar(){
+    if (this.fechaInicioField!.value != "" && this.fechaFinalField!.value != "") {
+      this.consultarFechas(this.fechaInicioField!.value, this.fechaFinalField!.value);
+    } else if (this.formularioReporteria.get('correlativo')!.value != "") {
+      this.consultarCorrelativo(this.formularioReporteria.get('correlativo')!.value);
+    } else if (this.formularioReporteria.get('puntoAtencion')!.value != "") {
+      console.log(this.formularioReporteria.get('puntoAtencion')!.value);
+      this.consultarPuntoAtencion(parseInt(this.formularioReporteria.get('puntoAtencion')!.value));
+    }else if (this.formularioReporteria.get('region')!.value != "") {
+      this.consultarRegion(parseInt(this.formularioReporteria.get('region')!.value));
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes llenar al menos un campo',
+      })
+    }
+  }
+
+
+   get fechaInicioField(){
+    return this.formularioReporteria.get('FechaInicio');
+   }
+
+    get fechaFinalField(){
+    return this.formularioReporteria.get('FechaFinal');
+    }
+
+
+    verDetalle(idQueja:string){
+        const dialogRef = this.dialog.open(TrazabilidadComponent, {
+          width: '600px',   
+          height: '300px',  
+         
+        });
+        dialogRef.componentInstance.correlativo = idQueja;
+      
+  }
+    
 }
