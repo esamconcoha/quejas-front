@@ -3,6 +3,10 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/service/token.service';
 import Swal from 'sweetalert2';
+import { navDataCuentaHabiente } from './nav-data-cuentaHabiente';
+import { navDataOperador } from './nav-data-operador';
+import { navDataCentralizador } from './nav-data-centralizador';
+import { navDataReceptor } from './nav-data-receptor';
 
 
 interface SideNavToggle{
@@ -21,7 +25,8 @@ export class SidebarComponent implements OnInit {
   
   collapsed=false;
   screenWidth: number= 0;
-  navData=navbarData;
+  navData:any=[];
+  
 
   constructor(private tokenService: TokenService,
     private router: Router) { 
@@ -30,6 +35,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+    this.validarRol();
   }
 
   // autenticar() {  
@@ -65,6 +71,36 @@ export class SidebarComponent implements OnInit {
     this.collapsed=false;
     this.onToggleSideNav.emit({collapsed: this.collapsed,  screenWidth: this.screenWidth})
   }
+
+
+
+  validarRol(){
+   const rol= this.tokenService.getRol();
+
+    switch(rol){
+      case '1':
+        this.navData= navbarData;
+        break;
+
+     case '2':
+      this.navData=navDataOperador;
+      break;
+      case '3':
+        this.navData=navDataCentralizador;
+        break;
+      case '4':
+        this.navData=navDataReceptor;
+        break;
+      case '6':
+        this.navData= navDataReceptor;
+
+    }
+
+  }
+
+
+
+
 }
 
 

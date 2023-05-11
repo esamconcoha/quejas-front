@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { TipoQuejasComponent } from './tipo-quejas/tipo-quejas.component';
+import { FichaComponent } from './asignacion-queja/ficha/ficha.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
     {path:'body',component:BodyComponent},
     {path:'tipo-queja',component:TipoQuejasComponent},
    {path:'principal',component:DashboardComponent},
-    {path:'',redirectTo:'dashboard/principal'}
+    {path:'',redirectTo:'dashboard/principal'},
+    {path:'ficha',component:FichaComponent}
 
   ]}
 ];

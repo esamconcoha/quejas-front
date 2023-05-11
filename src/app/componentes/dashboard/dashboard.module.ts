@@ -36,6 +36,7 @@ import { modificarPunto } from '../Models/PuntosAtencion';
 import { ModificarTipoComponent } from './tipo-quejas/modificar-tipo/modificar-tipo.component';
 import { AgregarUsuarioComponent } from './usuarios-pa/agregar-usuario/agregar-usuario.component';
 import { ModificarUsuarioComponent } from './usuarios-pa/modificar-usuario/modificar-usuario.component';
+import { FichaComponent } from './asignacion-queja/ficha/ficha.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -54,7 +55,8 @@ import { ModificarUsuarioComponent } from './usuarios-pa/modificar-usuario/modif
     AgregarTipoComponent,
    ModificarTipoComponent,
    AgregarUsuarioComponent,
-   ModificarUsuarioComponent
+   ModificarUsuarioComponent,
+   FichaComponent
   ],
   imports: [
     CommonModule,

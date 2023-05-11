@@ -1,3 +1,4 @@
+
 export class Queja {
     idQueja?: number=0;
     nombre: string='';
@@ -35,4 +36,12 @@ export interface tablaAsignacionQueja{
     idQueja:number;
     correlativo:string;
     fechaCreacion:Date;
+}
+
+export interface fichaQueja{
+    correlativo:string;
+    nombreMedio:string;
+    fechaIngreso: string;
+    descripcionTipoQueja:string;
+    detalleQueja: string;
 }

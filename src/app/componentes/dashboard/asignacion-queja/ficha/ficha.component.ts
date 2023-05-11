@@ -1,9 +1,10 @@
-import { tablaAsignacionQueja } from './../../Models/Queja';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { QuejaService } from 'src/app/service/Queja.service';
-import { RechazarQuejaComponent } from './rechazar-queja/rechazar-queja.component';
-import { AsignarQuejaComponent } from './asignar-queja/asignar-queja.component';
+import { fichaQueja } from 'src/app/componentes/Models/Queja';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { RechazarQuejaComponent } from '../rechazar-queja/rechazar-queja.component';
+import { AsignarQuejaComponent } from '../asignar-queja/asignar-queja.component';
 import Swal from 'sweetalert2';
 interface SideNavToggle{
   screenWidth: number;
@@ -11,24 +12,33 @@ interface SideNavToggle{
 }
 
 @Component({
-  selector: 'app-asignacion-queja',
-  templateUrl: './asignacion-queja.component.html',
-  styleUrls: ['./asignacion-queja.component.css']
+  selector: 'app-ficha',
+  templateUrl: './ficha.component.html',
+  styleUrls: ['./ficha.component.css']
 })
-export class AsignacionQuejaComponent implements OnInit {
+export class FichaComponent implements OnInit {
+
   isSideNavCollapsed=false;
   screenWidth: number = 0;
-  Queja: tablaAsignacionQueja[]=[];
 
+  idQueja:number=0;
+  fichaQueja?: fichaQueja;
 
   constructor(
+    private route: ActivatedRoute,
     private service: QuejaService,
     public dialog: MatDialog
-  ) { }
+  ) { 
+
+    this.route.queryParams.subscribe(params => {
+      this.idQueja = params['idQueja']
+    });
+  }
 
   ngOnInit() {
-    this.traerQuejas();
+    this.traerDatosFicha();
   }
+
   onToggleSideNav(data: SideNavToggle):void{
     this.screenWidth = data.screenWidth;
     this.isSideNavCollapsed = data.collapsed;
@@ -45,31 +55,31 @@ export class AsignacionQuejaComponent implements OnInit {
   }
 
 
-
-  traerQuejas(){
-  this.service.tablaAsignacionQueja().subscribe(quejas=>{
-    this.Queja=quejas;
-    console.log(this.Queja);
-  })
-  }
-
-  
-  alertar(){
-    Swal.fire({
-      title: '¿Está seguro de que quiere rechazar este registro?',
-      text: '',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'Cancelar'
-    }).then((result)=>{
-      if(result.isConfirmed){
-        this.openDialogRechazar();
-      }else{
-  
-      }
+  traerDatosFicha(){
+    this.service.fichaQueja(this.idQueja).subscribe(ficha=>{
+      this.fichaQueja=ficha;
+      console.log(this.fichaQueja);
     })
   }
+
+
+alertar(){
+  Swal.fire({
+    title: '¿Está seguro de que quiere rechazar este registro?',
+    text: '',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí',
+    cancelButtonText: 'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      this.openDialogRechazar();
+    }else{
+
+    }
+  })
+}
+
 
   openDialogRechazar(){
     const dialogConfig = new MatDialogConfig();
@@ -84,6 +94,7 @@ export class AsignacionQuejaComponent implements OnInit {
   dialogConfig.width = '600px';
   const dialogRef= this.dialog.open(AsignarQuejaComponent, dialogConfig);
   }
+
 
 
 }

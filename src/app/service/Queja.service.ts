@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MedioIngresoQueja } from '../componentes/Models/MedioIngresoQueja';
 import { PuntosAtencionList } from '../componentes/Models/PuntosAtencion';
-import { Queja, Correlativo, tableQueja, tablaAsignacionQueja } from '../componentes/Models/Queja';
+import { Queja, Correlativo, tableQueja, tablaAsignacionQueja, fichaQueja } from '../componentes/Models/Queja';
 import { TipoQuejaList } from '../componentes/Models/TIpoQueja';
 import { tap } from 'rxjs/operators';
 @Injectable({
@@ -83,6 +83,9 @@ tablaAsignacionQueja(): Observable<tablaAsignacionQueja[]>{
   return this.httpClient.get<tablaAsignacionQueja[]>(`${this.baseURL}/tablaAsignacionQueja`);
 }
 
+fichaQueja(idQueja:number): Observable<fichaQueja>{
+  return this.httpClient.get<fichaQueja>(`${this.baseURL}/fichaQueja/`+`${idQueja}`);
+}
   
 }
 
