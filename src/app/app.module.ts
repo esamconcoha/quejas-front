@@ -24,12 +24,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from './componentes/helpers/auth.interceptor';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { AutoConsultaComponent } from './componentes/auto-consulta/auto-consulta.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
     MiPrestamitoRegistrarseComponent,
+    AutoConsultaComponent
   
    
 
@@ -56,7 +59,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CommonModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgxCaptchaModule
 
   ]
 

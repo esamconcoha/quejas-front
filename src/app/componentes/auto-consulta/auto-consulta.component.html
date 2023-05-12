@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark  bg-light">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a href="/menu-principal" routerLinkActive="active" class="nav-link ms-auto" style="color:white;">MI PRESTAMITO
+      </a>
+    </li>
+  </ul>
+</nav>
+<div class="container" >
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <mat-card>
+        <div class="text-center" *ngIf="captcha">
+          <form [formGroup]="aFormGroup" (ngSubmit)="onSubmit()">
+            <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" formControlName="recaptcha"></ngx-recaptcha2>
+            <button type="submit" class="btn btn-primary" [disabled]="aFormGroup.invalid">Enviar</button>
+          </form>
+        </div>
+
+
+        <form [formGroup]="formularioQueja">
+          <div>
+            <div class="row ">
+              <div class="col">
+                <mat-form-field appearance="standard" style="width:300px">
+                  <label for="noqueja">No. Queja </label>
+                  <input matInput type="email" formControlName="noqueja" requird placeholder="Digite su correo electronico">
+                  <mat-error *ngIf="noquejaField?.hasError('required')">Ingresa un numero de queja</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-success" class="Filtrar" (click)="consultar()"> Consulta </button>
+            </div>
+          </div>
+        </form>
+    
+      </mat-card>
+    </div>
+  </div>
+</div>
