@@ -38,9 +38,9 @@ export class PuntosAtencionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.obtenerRegiones();
-    
-  
+
   }
 
 
@@ -65,11 +65,13 @@ export class PuntosAtencionComponent implements OnInit {
 
 // logica del componente propiamente
 obtenerRegiones(){
-this.traerRegiones=[];
+  this.traerRegiones=[];
   this.service.traerRegiones().subscribe((nombreRegion) => {
     this.traerRegiones= nombreRegion;
     console.log(this.traerRegiones);
+
   });
+
 }
 
 
