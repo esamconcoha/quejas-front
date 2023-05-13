@@ -90,9 +90,12 @@ alertar(){
 
   openDialogAsignar(){
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.maxWidth = '800px'; 
-  dialogConfig.width = '600px';
+    dialogConfig.maxWidth = '1200px'; 
+  dialogConfig.width = '800px';
+  
   const dialogRef= this.dialog.open(AsignarQuejaComponent, dialogConfig);
+  dialogRef.componentInstance.idQueja=this.idQueja;
+
   }
 
 

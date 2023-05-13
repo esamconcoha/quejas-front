@@ -40,6 +40,8 @@ export interface tablaAsignacionQueja{
 }
 
 export interface fichaQueja{
+
+ 
     correlativo:string;
     nombreMedio:string;
     fechaIngreso: string;

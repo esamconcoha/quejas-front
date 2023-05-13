@@ -1,3 +1,25 @@
-<p>
-  asignar-queja works!
-</p>
+
+
+  <mat-card *ngIf="fichaQueja">
+      <mat-card-title class="titulo">correlativo</mat-card-title>
+      <mat-card-content class="sub">{{fichaQueja.correlativo}}</mat-card-content>
+
+      <mat-card-title class="titulo">Tipo de queja</mat-card-title>
+      <mat-card-content class="sub">{{fichaQueja.descripcionTipoQueja}}</mat-card-content>
+
+      <mat-card-title class="titulo">Detalle de queja</mat-card-title>
+      <mat-card-content class="sub">{{fichaQueja.detalleQueja}}</mat-card-content>
+      
+      <mat-card-title class="titulo">fecha de ingreso</mat-card-title>
+      <mat-card-content class="sub">{{fichaQueja.fechaIngreso}}</mat-card-content>
+
+      <mat-card-title class="titulo">medio de ingreso</mat-card-title>
+      <mat-card-content class="sub">{{fichaQueja.nombreMedio}}</mat-card-content>
+  </mat-card>
+
+
+  <div class="botones">
+   
+    <button mat-raised-button  color="warn" class="rechazar">regresar</button>
+    <button type="button" class="btn btn-primary asignar">Asignar</button>
+</div>

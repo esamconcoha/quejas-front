@@ -64,6 +64,8 @@ validarFormulario(){
       text: 'Por favor complete los campos obligatorios.',
       icon: 'error',
       confirmButtonText: 'OK'
+    }).then(()=>{
+      this.dialogRef.close(window.location.href='dashboard/tipo-queja');
     });
   }else{
     this.validarExistencia();
@@ -83,6 +85,8 @@ validarFormulario(){
           text: 'Ya existe un tipo de queja con estas siglas.',
           icon: 'error',
           confirmButtonText: 'OK'
+        }).then(()=>{
+          this.dialogRef.close(window.location.href='dashboard/tipo-queja');
         });
       }else{
         this.alertar(); 
@@ -142,16 +146,7 @@ validarFormulario(){
     }
 
    return this.service.modificarTipoQueja(this.idTipoQueja,modificarPuntos).toPromise();//el return es para que retorne la promesa que espera el metodo alertar(); para que pueda mostrar el swal
-   /* .then(PUNTO=>{
-      Swal.fire({
-        titleText: `Se ha Modificado el tipo de queja con éxito.`,
-        icon: 'success',
-        showCloseButton: true,
-        showConfirmButton: false,
-        
-    });z
-   
-  }) */
+
 
   
   }

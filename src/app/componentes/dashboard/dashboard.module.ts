@@ -39,6 +39,7 @@ import { ModificarUsuarioComponent } from './usuarios-pa/modificar-usuario/modif
 import { FichaComponent } from './asignacion-queja/ficha/ficha.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { TrazabilidadComponent } from './reporte-administrativo/trazabilidad/trazabilidad.component';
+import { AsignarQuejaComponent } from './asignacion-queja/asignar-queja/asignar-queja.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -58,8 +59,7 @@ import { TrazabilidadComponent } from './reporte-administrativo/trazabilidad/tra
    ModificarTipoComponent,
    AgregarUsuarioComponent,
    ModificarUsuarioComponent,
-   FichaComponent,
-   TrazabilidadComponent
+   FichaComponent
   ],
   imports: [
     CommonModule,
