@@ -35,26 +35,22 @@ getCorrelativo(idQueja: number): Observable<Correlativo> {
 listarQuejaPorPuntoAtencion(idPuntosAtencion:number): Observable<tableQueja[]> {
   return this.httpClient.get<tableQueja[]>(`${this.baseURL}/QuejaporPuntosAtencion/`+`${idPuntosAtencion}`);
 }
+
+
 private cacheMedioIngreso!: MedioIngresoQueja[];
 
 listarCatalogoMedioIngreso(): Observable<MedioIngresoQueja[]> {
+ 
   if (this.cacheMedioIngreso) {
     console.log("se obtuvo de cache 1d");
     return of(this.cacheMedioIngreso);
-    
   }
-
   const cachedDataRazon = localStorage.getItem('cacheMedioIngreso');
   if (cachedDataRazon) {
     this.cacheMedioIngreso = JSON.parse(cachedDataRazon);
     console.log("se obtuvo de cache");
     return of(this.cacheMedioIngreso);
-  
   }
-
-  
-
-
   return this.httpClient.get<MedioIngresoQueja[]>(`${this.baseURL}/medio-ingreso`).pipe(
     tap(data => {
       console.log(data);

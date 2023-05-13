@@ -118,6 +118,7 @@ export class IngresoQuejaComponent implements OnInit {
   }
 
   listarMedioIngresoQueja(){
+    
     this.quejaServicio.listarCatalogoMedioIngreso().subscribe(dato =>{
       console.log(dato);
       this.listaMedioIngreso = dato;
