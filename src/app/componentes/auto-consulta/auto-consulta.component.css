@@ -65,3 +65,36 @@ label{
   
   text-decoration: underline;
 }
+
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.step-item {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: lightgray;
+  margin-bottom: 10px;
+}
+
+.step-item.completed {
+  background-color: #13FE00;
+}
+
+.step-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step-list li {
+  margin-bottom: 10px;
+}
+
+.step-list li.completed {
+  color: #13FE00;
+}
