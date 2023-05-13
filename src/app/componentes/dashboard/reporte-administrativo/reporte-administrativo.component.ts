@@ -172,6 +172,16 @@ export class ReporteAdministrativoComponent implements OnInit {
 
   filtrar(){
     if (this.fechaInicioField!.value != "" && this.fechaFinalField!.value != "") {
+      const fechaInicio = new Date(this.fechaInicioField!.value);
+      const fechaFinal = new Date(this.fechaFinalField!.value);
+      if (fechaInicio > fechaFinal) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La fecha de inicio no puede ser mayor a la fecha final',
+        })
+        return;
+      }
       this.consultarFechas(this.fechaInicioField!.value, this.fechaFinalField!.value);
     } else if (this.formularioReporteria.get('correlativo')!.value != "") {
       this.consultarCorrelativo(this.formularioReporteria.get('correlativo')!.value);

@@ -16,34 +16,25 @@ guardarPuntosAtencion(puntosAtencion:PuntosAtencion): Observable<PuntosAtencion>
   return this.httpClient.post<PuntosAtencion>(`${this.baseURL}/guardar`, puntosAtencion);
 }
 
-
-private cacheRegiones!: traerRegiones[];
-
 traerRegiones(): Observable<traerRegiones[]> {
-  if(this.cacheRegiones){
-    console.log("se obtuvo cache de regiones");
-    return of(this.cacheRegiones);
+  const cachedDataRegiones = localStorage.getItem('cacheRegiones');
+  if (cachedDataRegiones) {
+    const parsedData = JSON.parse(cachedDataRegiones) as traerRegiones[];
+    console.log("Se obtuvo de la caché");
+    return of(parsedData);
   }
 
-  const cacheTraerRegiones= localStorage.getItem('cacheRegiones');
-
-  if(cacheTraerRegiones){
-    this.cacheRegiones = JSON.parse(cacheTraerRegiones);
-    console.log("se obtuvo de cache");
-    return of(this.cacheRegiones);
-  }
-
-return this.httpClient.get<traerRegiones[]>(`${this.baseURL}/traerRegiones`).pipe(
-  tap(data =>{
-    console.log(data);
-    this.cacheRegiones = data;
-    localStorage.setItem('cacheRegiones', JSON.stringify(this.cacheRegiones));
-  })
-);
-
+  return this.httpClient.get<traerRegiones[]>(`${this.baseURL}/traerRegiones`).pipe(
+    tap(data => {
+      console.log(data);
+      localStorage.setItem('cacheRegiones', JSON.stringify(data));
+    })
+  );
 }
 
-
+borrarCacheRegiones() {
+  localStorage.removeItem('cacheRegiones');
+}
 
 traerPuntos(idRegion:Number):Observable<traerPuntosAtencion[]>{
   return this.httpClient.get<traerPuntosAtencion[]>(`${this.baseURL}/traerTabla/${idRegion}`);

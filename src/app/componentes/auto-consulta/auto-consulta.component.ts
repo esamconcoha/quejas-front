@@ -84,8 +84,6 @@ export class AutoConsultaComponent implements OnInit {
         'A la fecha se está atendiendo su queja ingresada el: ' +
         this.fechaCreacion;
     } else if (dato == 6) {
-      this.descripcion =
-        'Mostrar la información de las acciones documentadas en el sistema para dar por finalizada la atención de la queja. (la cual ha sido grabada por el usuario con rol Centralizador en la etapa Finalizada en el campo Resultado.';
       this.resumen = `Su queja ingresada el ${this.fechaCreacion} ha sido finalizada en fecha ${this.fechaFInal} `;
     }
   }
