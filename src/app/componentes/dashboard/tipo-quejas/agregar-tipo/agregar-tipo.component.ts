@@ -23,7 +23,7 @@ export class AgregarTipoComponent implements OnInit {
   constructor(
     private service: TipoQuejaService,
     private formBuilder:FormBuilder,
-    private dialogRef: MatDialogRef<AgregarPuntoComponent>,
+    private dialogRef: MatDialogRef<AgregarTipoComponent>,
     private tokenService: TokenService,
     private router: Router
   ) { 

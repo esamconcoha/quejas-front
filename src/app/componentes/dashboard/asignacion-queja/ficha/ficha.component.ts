@@ -92,10 +92,10 @@ alertar(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.maxWidth = '1200px'; 
   dialogConfig.width = '800px';
-  
+  dialogConfig.data={idQueja:this.idQueja}
   const dialogRef= this.dialog.open(AsignarQuejaComponent, dialogConfig);
-  dialogRef.componentInstance.idQueja=this.idQueja;
-
+  
+  
   }
 
 

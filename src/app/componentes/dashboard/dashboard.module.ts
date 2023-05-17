@@ -37,7 +37,7 @@ import { ModificarTipoComponent } from './tipo-quejas/modificar-tipo/modificar-t
 import { AgregarUsuarioComponent } from './usuarios-pa/agregar-usuario/agregar-usuario.component';
 import { ModificarUsuarioComponent } from './usuarios-pa/modificar-usuario/modificar-usuario.component';
 import { FichaComponent } from './asignacion-queja/ficha/ficha.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatCheckbox, MatCheckboxModule} from '@angular/material/checkbox';
 import { TrazabilidadComponent } from './reporte-administrativo/trazabilidad/trazabilidad.component';
 import { AsignarQuejaComponent } from './asignacion-queja/asignar-queja/asignar-queja.component';
 @NgModule({
@@ -59,7 +59,8 @@ import { AsignarQuejaComponent } from './asignacion-queja/asignar-queja/asignar-
    ModificarTipoComponent,
    AgregarUsuarioComponent,
    ModificarUsuarioComponent,
-   FichaComponent
+   FichaComponent,
+   AsignarQuejaComponent
   ],
   imports: [
     CommonModule,
@@ -78,9 +79,9 @@ import { AsignarQuejaComponent } from './asignacion-queja/asignar-queja/asignar-
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
-
     MatPaginatorModule,
     MatDialogModule,
+    
    
   ]
 })
