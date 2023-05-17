@@ -174,6 +174,7 @@ export class ReporteAdministrativoComponent implements OnInit {
     if (this.fechaInicioField!.value != "" && this.fechaFinalField!.value != "") {
       const fechaInicio = new Date(this.fechaInicioField!.value);
       const fechaFinal = new Date(this.fechaFinalField!.value);
+      
       if (fechaInicio > fechaFinal) {
         Swal.fire({
           icon: 'error',

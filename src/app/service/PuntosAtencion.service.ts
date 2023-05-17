@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PuntosAtencionService {
-  private baseURL = "http://localhost:8081/Mi-prestamito/api/PuntosAtencion";
+  private baseURL = "https://muestras-medicas.herokuapp.com/Mi-prestamito/api/PuntosAtencion";
 constructor(private httpClient: HttpClient) { }
 
 guardarPuntosAtencion(puntosAtencion:PuntosAtencion): Observable<PuntosAtencion> {

@@ -7,7 +7,7 @@ import { Region } from '../componentes/Models/Region';
   providedIn: 'root'
 })
 export class RegionService {
-    private baseURL = "http://localhost:8081/Mi-prestamito/api/Region";
+    private baseURL = "https://muestras-medicas.herokuapp.com/Mi-prestamito/api/Region";
 constructor(private httpClient: HttpClient) { }
 
 getRegionList(): Observable<Region[]> {

@@ -8,7 +8,7 @@ import { TipoQuejaList, contadorSiglas, tipoQueja } from '../componentes/Models/
   })
 export class TipoQuejaService {
 
-    private baseURL = "http://localhost:8081/Mi-prestamito/api/tipoQueja";
+    private baseURL = "https://muestras-medicas.herokuapp.com/Mi-prestamito/api/tipoQueja";
     constructor(private httpClient: HttpClient) { }
 
     guardarTipoQueja(TipoQueja: tipoQueja):Observable<tipoQueja>{

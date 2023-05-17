@@ -11,7 +11,7 @@ import { tap } from 'rxjs/operators';
 })
 export class UsuarioService {
 
-  private baseURL = "http://localhost:8081/Mi-prestamito/api/Usuarios";
+  private baseURL = "https://muestras-medicas.herokuapp.com/Mi-prestamito/api/Usuarios";
 constructor(private httpClient: HttpClient) { }
 
 registrarUsuario(usuariosinternos: Usuario): Observable<Usuario> {
