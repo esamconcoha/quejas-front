@@ -178,7 +178,9 @@ switch(id_cargo){
         text: 'Por favor ingrese los datos correctamente.',
         icon: 'error',
         confirmButtonText: 'OK'
-      });
+      }).then(()=>{
+        this.dialogRef.close(window.location.href='dashboard/usuarios-pa');
+      })
       
     }
   }

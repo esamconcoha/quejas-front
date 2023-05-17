@@ -23,7 +23,7 @@ export class AgregarTipoComponent implements OnInit {
   constructor(
     private service: TipoQuejaService,
     private formBuilder:FormBuilder,
-    private dialogRef: MatDialogRef<AgregarPuntoComponent>,
+    private dialogRef: MatDialogRef<AgregarTipoComponent>,
     private tokenService: TokenService,
     private router: Router
   ) { 
@@ -49,6 +49,8 @@ export class AgregarTipoComponent implements OnInit {
         text: 'Por favor complete los campos obligatorios.',
         icon: 'error',
         confirmButtonText: 'OK'
+      }).then(()=>{
+        this.dialogRef.close(window.location.href='dashboard/tipo-queja');
       });
     }else{
       this.validarExistencia();
@@ -65,6 +67,8 @@ export class AgregarTipoComponent implements OnInit {
           text: 'Ya existe un tipo de queja con estas siglas.',
           icon: 'error',
           confirmButtonText: 'OK'
+        }).then(()=>{
+          this.dialogRef.close(window.location.href='dashboard/tipo-queja');
         });
       }else{
         const nuevoTipo: tipoQueja={

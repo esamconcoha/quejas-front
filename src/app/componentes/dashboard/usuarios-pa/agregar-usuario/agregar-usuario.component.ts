@@ -82,7 +82,9 @@ validarFormulario(){
       text: 'Por favor ingrese los datos correctamente.',
       icon: 'error',
       confirmButtonText: 'OK'
-    });
+    }).then(()=>{
+      this.dialogRef.close(window.location.href='dashboard/usuarios-pa');
+    })
   }
 
 }
@@ -97,7 +99,9 @@ validarExistencia(){
         text: 'Error al guardar los datos, el usuario ya existe en el punto de atención '+this.contadorUsuarios.nombrePunto ,
         icon: 'error',
         confirmButtonText: 'OK'
-      });
+      }).then(()=>{
+        this.dialogRef.close(window.location.href='dashboard/usuarios-pa');
+      })
     }else{
       this.CrearUsuario();
     }
